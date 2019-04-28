@@ -157,14 +157,28 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UeH-Lb-b1d">
-                                <rect key="frame" x="0.0" y="555" width="375" height="174"/>
+                                <rect key="frame" x="0.0" y="493" width="375" height="236"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="174" id="LF6-y9-EDz"/>
+                                    <constraint firstAttribute="height" constant="236" id="LF6-y9-EDz"/>
                                 </constraints>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="ShV-Nc-rbw">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wy-Ye-QnB">
+                                            <rect key="frame" x="15" y="9" width="341" height="27"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IndexCell" id="srq-jj-ofd" customClass="IndexCell" customModule="StockTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="srq-jj-ofd" id="7XE-Nt-9PL">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
@@ -185,7 +199,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xul-fm-o9C">
-                                                    <rect key="frame" x="148" y="0.0" width="39" height="21"/>
+                                                    <rect key="frame" x="131" y="0.0" width="109" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -205,7 +219,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="UeH-Lb-b1d" firstAttribute="leading" secondItem="g3m-yl-jzg" secondAttribute="leading" id="2g3-M1-Hdr"/>
-                            <constraint firstItem="UeH-Lb-b1d" firstAttribute="top" secondItem="E9o-pA-gCa" secondAttribute="bottom" constant="8" symbolic="YES" id="KMn-vq-DmW"/>
+                            <constraint firstItem="UeH-Lb-b1d" firstAttribute="top" secondItem="E9o-pA-gCa" secondAttribute="bottom" constant="-54" id="KMn-vq-DmW"/>
                             <constraint firstItem="g3m-yl-jzg" firstAttribute="trailing" secondItem="UeH-Lb-b1d" secondAttribute="trailing" id="SIF-q4-6Sb"/>
                             <constraint firstItem="E9o-pA-gCa" firstAttribute="leading" secondItem="g3m-yl-jzg" secondAttribute="leading" id="Unn-gt-qyU"/>
                             <constraint firstItem="E9o-pA-gCa" firstAttribute="top" secondItem="g3m-yl-jzg" secondAttribute="top" id="rOB-uq-wAs"/>
@@ -216,6 +230,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="HeatMap" id="nmI-X6-LPG"/>
                     <connections>
+                        <outlet property="MarketName" destination="5Wy-Ye-QnB" id="VbR-VK-zwt"/>
                         <outlet property="MarketTableView" destination="UeH-Lb-b1d" id="lk0-5Y-GcS"/>
                         <outlet property="WorldMapView" destination="E9o-pA-gCa" id="Yuf-tE-b26"/>
                     </connections>
