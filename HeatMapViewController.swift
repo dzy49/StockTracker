@@ -10,13 +10,39 @@ import UIKit
 import Foundation
 import FSInteractiveMap
 
+
 class IndexCell: UITableViewCell{
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var volume: UILabel!
 }
+
 class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource {
-    
+    func changezoom(){
+        let point=CGRect(x: WorldMapView.frame.midX, y: WorldMapView.frame.midY, width: WorldMapView.frame.midX, height: WorldMapView.frame.midX)
+        WorldMapView.zoom(to: point, animated: true)
+        
+    }
+    @IBAction func ZoomChange(_ sender: UISegmentedControl) {
+        switch ZoomControl.selectedSegmentIndex{
+        case 0:
+            changezoom()
+        case 1:
+            changezoom()
+        case 2:
+            changezoom()
+        case 3:
+            changezoom()
+        case 4:
+            changezoom()
+        case 5:
+            changezoom()
+        default:
+            break
+        }
+    }
+    @IBOutlet weak var ZoomControl: UISegmentedControl!
+    var mapColor = [String: UIColor]()
     @IBOutlet weak var MarketName: UILabel!
     var spinner:UIActivityIndicatorView=UIActivityIndicatorView()
     var currIndex=[String]()
@@ -36,13 +62,16 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
     }
     
 
-    func getMarketData(marketName:String)->(Double,String){
-       
+    func getMarketData(marketName:String)->(String,Double){
         var price=0.0
+        var pchange=""
         if let p=(model.heatmapdict[marketName]?.price){
-            price=p
+            if let change=(model.heatmapdict[marketName]?.pchange){
+                price=p
+                pchange=change
+            }
         }
-        return (price,"1000")
+        return (pchange,price)
         //TODO
     }
     
@@ -54,9 +83,9 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         let volume=getMarketData(marketName: currIndex[indexPath.row]).1
         if let myCell =  cell as? IndexCell {
             myCell.name.text = currIndex[indexPath.row]
-            myCell.price.text = String(price)
-            myCell.volume.text = volume
-            if(price>0){
+            myCell.price.text = price
+            myCell.volume.text = String(volume)
+            if(Double(price.dropLast())!>0.0){
                 myCell.price.backgroundColor = UIColor(red: 0, green: 0.7556203008, blue: 0.1655870676, alpha: 1)
             }else{
                 myCell.price.backgroundColor=UIColor.red
@@ -66,53 +95,61 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         return cell
     }
     
-    func computeColors()->[String:UIColor]{
-        //TODO
-        var mapColor = [String: UIColor]()
-        if let p=model.heatmapdict["DJI"]?.price{
-            if(p > 0.0){
-                mapColor["US"]=UIColor.green
-            }else{
-                mapColor["US"]=UIColor.red
+    func computeColors(){
+        for country in model.marketIndex{
+            for indexName in country.value{
+                if let info=model.heatmapdict[indexName]{
+                    if(info.change>0.0){
+                        mapColor[country.key]=UIColor.green
+                    }else{
+                        mapColor[country.key]=UIColor.red
+                    }
+                }
             }
         }
-        
-        if let p=model.heatmapdict["000001.SHH"]?.price{
-            if(p > 0.0){
-                mapColor["CN"]=UIColor.green
-            }else{
-                mapColor["CN"]=UIColor.red
-            }
-        }
-        return mapColor
+   
     }
     
     override func viewDidAppear(_ animated: Bool) {
+       
         if(model.loaded==false){
-            model.LoadHeatMapData()
+        
+        for symbol in model.indexArr{
+            model.getStockIndexInfo(symbol: symbol){
+                _ in
+                self.updateMapColor()
+            }
+            model.loaded=true
+        }
+        
+           
            // model.getSesssionDataTask()
             spinner.stopAnimating()
+        }
+    }
         
+       // updateMapColor()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        WorldMapView.delegate=self
+        MarketTableView.delegate=self
+        MarketTableView.dataSource=self
+//        model.LoadHeatMapData()
+        //model.getSesssionDataTask()
+        spinner.center=view.center
+        spinner.style=UIActivityIndicatorView.Style.gray
+        view.addSubview(spinner)
+        spinner.startAnimating()
+        spinner.hidesWhenStopped=true
         weak var oldClickedLayer = CAShapeLayer()
-        
-        var mapData              = [String: Int]()
-        mapData["US"]          = 12
-        mapData["australia"]     = 2
-        mapData["north_america"] = 5
-        mapData["south_america"] = 14
-        mapData["africa"]        = 5
-        mapData["europe"]        = 20
-        
-        
-        //var mapData2            = [String: UIColor]()
-        //mapData2["US"]          = UIColor.red
-        
         var mapColors = [UIColor]()
         mapColors.append(UIColor.lightGray)
         mapColors.append(UIColor.darkGray)
         map.frame = WorldMapView.frame
         map.clickHandler = {(identifier: String? , _ layer: CAShapeLayer?) -> Void in
-            if(identifier=="CN"||identifier=="US"){
+            if(model.supportedCountry.contains(identifier!)){
                 if (oldClickedLayer != nil) {
                     oldClickedLayer?.zPosition = 0
                     oldClickedLayer?.shadowOpacity = 0
@@ -128,17 +165,13 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
                 //layer?.shadowColor = UIColor.blue.cgColor;
                 //layer?.fillColor=UIColor.blue.cgColor;
                 //print(identifier)
-                if(identifier=="CN"){
-                    self.MarketName.text="China"
-                    self.currIndex=model.marketIndex["CN"]!
-                    self.marketCount=1
+                
+                
+                if(model.supportedCountry.contains(identifier!)){
+                    self.MarketName.text=model.countryFullName[identifier!]
+                    self.currIndex=model.marketIndex[identifier!]!
+                    self.marketCount=model.marketIndex[identifier!]!.count
                     self.MarketTableView.reloadData()
-                }else if(identifier=="US"){
-                    self.MarketName.text="United States"
-                    self.currIndex=model.marketIndex["US"]!
-                    self.marketCount=2
-                    self.MarketTableView.reloadData()
-                    
                 }
                 
             }
@@ -148,32 +181,27 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         let mapName: String! = String("world-low")
         //map.color
         //map.loadMap(mapName, withData:mapData, colorAxis:mapColors)
-        map.loadMap(mapName, withColors: computeColors())
+        computeColors()
+        map.loadMap(mapName, withColors: mapColor)
         WorldMapView.addSubview(map)
         WorldMapView.setNeedsDisplay()
         WorldMapView.contentSize=CGSize(width: 1000, height: 1000)
         //WorldMapView.frame.size
         WorldMapView.maximumZoomScale=4
         WorldMapView.minimumZoomScale=0.5
-        }
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        WorldMapView.delegate=self
-        MarketTableView.delegate=self
-        MarketTableView.dataSource=self
-//        model.LoadHeatMapData()
-        //model.getSesssionDataTask()
-        spinner.center=view.center
-        spinner.style=UIActivityIndicatorView.Style.gray
-        view.addSubview(spinner)
-        spinner.startAnimating()
-        spinner.hidesWhenStopped=true
         
         
     }
     
+    func updateMapColor(){
+        //mapColor["US"]=UIColor.blue
+        //map.setColors(mapColor)
+        DispatchQueue.main.async {
+                //Do UI Code here.
+            self.computeColors()
+            self.map.setColors(self.mapColor)
+        }
+    }
 
     /*
     // MARK: - Navigation

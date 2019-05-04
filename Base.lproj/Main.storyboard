@@ -153,7 +153,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E9o-pA-gCa" customClass="UIScrollView">
-                                <rect key="frame" x="0.0" y="44" width="375" height="503"/>
+                                <rect key="frame" x="0.0" y="123" width="375" height="424"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UeH-Lb-b1d">
@@ -185,7 +185,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXW-U4-Gab">
-                                                    <rect key="frame" x="15" y="0.0" width="45" height="21"/>
+                                                    <rect key="frame" x="15" y="0.0" width="100" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -215,14 +215,31 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="77U-Dp-QVC">
+                                <rect key="frame" x="35" y="78" width="305" height="29"/>
+                                <segments>
+                                    <segment title="World"/>
+                                    <segment title="AS"/>
+                                    <segment title="EU"/>
+                                    <segment title="NA"/>
+                                    <segment title="SA"/>
+                                    <segment title="OC"/>
+                                </segments>
+                                <connections>
+                                    <action selector="ZoomChange:" destination="saj-h2-WcG" eventType="valueChanged" id="1tF-hT-6mX"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="UeH-Lb-b1d" firstAttribute="leading" secondItem="g3m-yl-jzg" secondAttribute="leading" id="2g3-M1-Hdr"/>
+                            <constraint firstItem="E9o-pA-gCa" firstAttribute="top" secondItem="77U-Dp-QVC" secondAttribute="bottom" constant="17" id="2oB-OA-ofB"/>
                             <constraint firstItem="UeH-Lb-b1d" firstAttribute="top" secondItem="E9o-pA-gCa" secondAttribute="bottom" constant="-54" id="KMn-vq-DmW"/>
                             <constraint firstItem="g3m-yl-jzg" firstAttribute="trailing" secondItem="UeH-Lb-b1d" secondAttribute="trailing" id="SIF-q4-6Sb"/>
                             <constraint firstItem="E9o-pA-gCa" firstAttribute="leading" secondItem="g3m-yl-jzg" secondAttribute="leading" id="Unn-gt-qyU"/>
-                            <constraint firstItem="E9o-pA-gCa" firstAttribute="top" secondItem="g3m-yl-jzg" secondAttribute="top" id="rOB-uq-wAs"/>
+                            <constraint firstItem="g3m-yl-jzg" firstAttribute="trailing" secondItem="77U-Dp-QVC" secondAttribute="trailing" constant="35" id="Y10-xf-Z0n"/>
+                            <constraint firstItem="77U-Dp-QVC" firstAttribute="leading" secondItem="g3m-yl-jzg" secondAttribute="leading" constant="35" id="epa-hN-WSG"/>
+                            <constraint firstItem="77U-Dp-QVC" firstAttribute="top" secondItem="g3m-yl-jzg" secondAttribute="top" constant="34" id="omH-CN-8bH"/>
                             <constraint firstItem="g3m-yl-jzg" firstAttribute="bottom" secondItem="UeH-Lb-b1d" secondAttribute="bottom" id="wCX-99-rHe"/>
                             <constraint firstItem="g3m-yl-jzg" firstAttribute="trailing" secondItem="E9o-pA-gCa" secondAttribute="trailing" id="wD8-hQ-yOm"/>
                         </constraints>
@@ -233,6 +250,7 @@
                         <outlet property="MarketName" destination="5Wy-Ye-QnB" id="VbR-VK-zwt"/>
                         <outlet property="MarketTableView" destination="UeH-Lb-b1d" id="lk0-5Y-GcS"/>
                         <outlet property="WorldMapView" destination="E9o-pA-gCa" id="Yuf-tE-b26"/>
+                        <outlet property="ZoomControl" destination="77U-Dp-QVC" id="UUt-RF-I2F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eeb-xQ-4D8" userLabel="First Responder" sceneMemberID="firstResponder"/>

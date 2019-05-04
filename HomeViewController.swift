@@ -32,7 +32,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     @IBAction func EditAction(_ sender: UIButton) {
         SavedTableViewOutlet.setEditing(!SavedTableViewOutlet.isEditing, animated: true)
-
+        HeatMapViewController().updateMapColor()
     }
     var saved:[(String,Double,Double)]=[("AAPL",11.1,3),("AAPL2",11.1,-3)]
     
