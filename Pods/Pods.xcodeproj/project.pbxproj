@@ -1,0 +1,826 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		034590048843E4D3B0B5073E9250979D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */; };
+		0A8A072F2A9ADA6759666E270CEA93DD /* FSInteractiveMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5E00D63781F4FBC731948AC6A0A651 /* FSInteractiveMapView.m */; };
+		11B84B0D91843BAB9856B71D8E07EF2F /* FSInteractiveMap-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EC199066418795461CD3424207BCFCF5 /* FSInteractiveMap-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		12579086094A0FE91DEE72E386432E64 /* FSSVG.h in Headers */ = {isa = PBXBuildFile; fileRef = 5410795C54D976791C5BB513DAFBE941 /* FSSVG.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		15DFCBDCF7A9BF0F3ABE2D8FC1031D7A /* ChartColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113F1CFE7117B2654D79CEA777963738 /* ChartColors.swift */; };
+		20CE242EF789F1CC0C9528958A0C1221 /* SwiftChart-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CECAEA8BA96EA2B69918A8C5D35DA6 /* SwiftChart-dummy.m */; };
+		2B91D12C6E2AE721AFD213EB155F1988 /* FSSVG.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B16B37B7547A0A0BF670D8147BF0B71 /* FSSVG.m */; };
+		4AD882C98EC0905B1046B9256E26FF4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */; };
+		6819569C6289CD1E87EC9EDA4F146363 /* FSSVGPathElement.m in Sources */ = {isa = PBXBuildFile; fileRef = F6272A28373E9DD51E040772B6E6028A /* FSSVGPathElement.m */; };
+		78BB7F5DE8471C9973389DC2B343B80F /* FSInteractiveMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = E5F5471241755063832ABFA50B56DD97 /* FSInteractiveMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AE903D69DE436016DEC7666F6F70972 /* SwiftChart-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7586AB1FF998920CEB1787017997CE18 /* SwiftChart-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7C637AB5526B53A111BEC4BB07FB0B15 /* FSSVGPathElement.h in Headers */ = {isa = PBXBuildFile; fileRef = E49297E9B0359E42AAD490CB468B265E /* FSSVGPathElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8690C327EBA839B1B5C572F406AC4401 /* FSSVGUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 093A0A6B14191C3C2053D5BFB5B84CCD /* FSSVGUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C182C7C3B245C50E53274D4BC1EC442 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A6E61B258F3DFDA31A98C6A16F3FB6 /* Chart.swift */; };
+		9E22429E05847890CDE86B6FF7B370AE /* Pods-StockTracker-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BD721BA850AB2B74A2B495B244B118 /* Pods-StockTracker-dummy.m */; };
+		B5E87003CC45C828537F42D7930067A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */; };
+		B64F8BBC745271AACA4D95FAD410C175 /* FSInteractiveMap-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FED805A18701970D455D263802B7153 /* FSInteractiveMap-dummy.m */; };
+		D2FBD8A5308A33193A31608CC1228E12 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECF2A2B0720AE923C22BED3192888BE0 /* UIKit.framework */; };
+		D7C71075DFB7B5A31C62417978114AC7 /* FSSVGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DA5CDDA02B9AEBFBE894FA1AD8DB664 /* FSSVGUtils.m */; };
+		EDC70AAE60A0FBCADEA9214239664A61 /* ChartSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = B436F5F23DCE9007E02FDFF64BFFAB35 /* ChartSeries.swift */; };
+		FF11916EF91D52A8EFD689521C7A627A /* Pods-StockTracker-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6165FC0994E5390300201D05174E4AD8 /* Pods-StockTracker-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CF0B4213AFBC9D4C2C5BB5961125FA3A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E244DA445A5F3270B458C5989175C44;
+			remoteInfo = FSInteractiveMap;
+		};
+		E8EEA9F07E57568419E9621A963BEF7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1D8E7BACB55BD239BC5CF0C11143BBC;
+			remoteInfo = SwiftChart;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		093A0A6B14191C3C2053D5BFB5B84CCD /* FSSVGUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSSVGUtils.h; path = FSInteractiveMap/FSInteractiveMap/FSSVG/FSSVGUtils.h; sourceTree = "<group>"; };
+		113F1CFE7117B2654D79CEA777963738 /* ChartColors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartColors.swift; path = Source/ChartColors.swift; sourceTree = "<group>"; };
+		1700D89346A39248791ABBBF49D69592 /* SwiftChart.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftChart.modulemap; sourceTree = "<group>"; };
+		1941C1890C4059E515168438AF3FAC64 /* SwiftChart-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftChart-prefix.pch"; sourceTree = "<group>"; };
+		2318012CD2D3E3B9567BA5A9C1603FF9 /* Pods-StockTracker-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-StockTracker-acknowledgements.markdown"; sourceTree = "<group>"; };
+		2B16B37B7547A0A0BF670D8147BF0B71 /* FSSVG.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSSVG.m; path = FSInteractiveMap/FSInteractiveMap/FSSVG/FSSVG.m; sourceTree = "<group>"; };
+		32CECAEA8BA96EA2B69918A8C5D35DA6 /* SwiftChart-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftChart-dummy.m"; sourceTree = "<group>"; };
+		34A6E61B258F3DFDA31A98C6A16F3FB6 /* Chart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Chart.swift; path = Source/Chart.swift; sourceTree = "<group>"; };
+		37B29B7188A92F2A09348F162EA3CBC3 /* FSInteractiveMap.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FSInteractiveMap.xcconfig; sourceTree = "<group>"; };
+		3A5E00D63781F4FBC731948AC6A0A651 /* FSInteractiveMapView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSInteractiveMapView.m; path = FSInteractiveMap/FSInteractiveMap/FSInteractiveMapView.m; sourceTree = "<group>"; };
+		3DA5CDDA02B9AEBFBE894FA1AD8DB664 /* FSSVGUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSSVGUtils.m; path = FSInteractiveMap/FSInteractiveMap/FSSVG/FSSVGUtils.m; sourceTree = "<group>"; };
+		40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		45146E523B53517BA0576118CA1EB7E5 /* Pods-StockTracker-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StockTracker-Info.plist"; sourceTree = "<group>"; };
+		45285971E730F973D76195907D5EDC43 /* FSInteractiveMap-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FSInteractiveMap-Info.plist"; sourceTree = "<group>"; };
+		4BE0D761BCB761B78CBE4B3710F193AC /* FSInteractiveMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FSInteractiveMap.framework; path = FSInteractiveMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FED805A18701970D455D263802B7153 /* FSInteractiveMap-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FSInteractiveMap-dummy.m"; sourceTree = "<group>"; };
+		52BD721BA850AB2B74A2B495B244B118 /* Pods-StockTracker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-StockTracker-dummy.m"; sourceTree = "<group>"; };
+		5410795C54D976791C5BB513DAFBE941 /* FSSVG.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSSVG.h; path = FSInteractiveMap/FSInteractiveMap/FSSVG/FSSVG.h; sourceTree = "<group>"; };
+		6165FC0994E5390300201D05174E4AD8 /* Pods-StockTracker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-StockTracker-umbrella.h"; sourceTree = "<group>"; };
+		69AA8DCC2E48A035AB6ACA904DD84F8A /* FSInteractiveMap-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSInteractiveMap-prefix.pch"; sourceTree = "<group>"; };
+		7586AB1FF998920CEB1787017997CE18 /* SwiftChart-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftChart-umbrella.h"; sourceTree = "<group>"; };
+		7AB0DF9400B14EBBE1BD01780331A104 /* SwiftChart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftChart.framework; path = SwiftChart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B5BECD17D8E9E12B752A5D79A262C4F /* Pods-StockTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StockTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AC966FF52C9AD0969D7AA27117E9BF5B /* SwiftChart.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftChart.xcconfig; sourceTree = "<group>"; };
+		B436F5F23DCE9007E02FDFF64BFFAB35 /* ChartSeries.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChartSeries.swift; path = Source/ChartSeries.swift; sourceTree = "<group>"; };
+		B9908A224951F01133C4349B179916A1 /* FSInteractiveMap.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FSInteractiveMap.modulemap; sourceTree = "<group>"; };
+		BA38BC69FBD758EF7968FBC8D5BEC7E3 /* Pods_StockTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_StockTracker.framework; path = "Pods-StockTracker.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C689CE6591270C6BF490ABF9F3597782 /* Pods-StockTracker-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-StockTracker-frameworks.sh"; sourceTree = "<group>"; };
+		D321196E085C233C0931326AD57305D6 /* Pods-StockTracker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-StockTracker.modulemap"; sourceTree = "<group>"; };
+		E49297E9B0359E42AAD490CB468B265E /* FSSVGPathElement.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSSVGPathElement.h; path = FSInteractiveMap/FSInteractiveMap/FSSVG/FSSVGPathElement.h; sourceTree = "<group>"; };
+		E5F5471241755063832ABFA50B56DD97 /* FSInteractiveMapView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSInteractiveMapView.h; path = FSInteractiveMap/FSInteractiveMap/FSInteractiveMapView.h; sourceTree = "<group>"; };
+		EADFDEDCD5E33ED1A11AA049CED70A25 /* SwiftChart-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftChart-Info.plist"; sourceTree = "<group>"; };
+		EC199066418795461CD3424207BCFCF5 /* FSInteractiveMap-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FSInteractiveMap-umbrella.h"; sourceTree = "<group>"; };
+		ECF2A2B0720AE923C22BED3192888BE0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		EE9314CF2B1818CFF163140214ABE7E7 /* Pods-StockTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-StockTracker.release.xcconfig"; sourceTree = "<group>"; };
+		F6272A28373E9DD51E040772B6E6028A /* FSSVGPathElement.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FSSVGPathElement.m; path = FSInteractiveMap/FSInteractiveMap/FSSVG/FSSVGPathElement.m; sourceTree = "<group>"; };
+		FC75CDB714625667794A63D5A8BA4BCF /* Pods-StockTracker-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-StockTracker-acknowledgements.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3C92AEB6129FA330F49CAFCE98AB3F4C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				034590048843E4D3B0B5073E9250979D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A79A2E00441F70558FCBA0C2F80C447 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5E87003CC45C828537F42D7930067A0 /* Foundation.framework in Frameworks */,
+				D2FBD8A5308A33193A31608CC1228E12 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F0578D4E9DE83EB7785EE44809468309 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AD882C98EC0905B1046B9256E26FF4E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		006ABF88BC640E7F41CAACF1AEE5AF4B /* Pods-StockTracker */ = {
+			isa = PBXGroup;
+			children = (
+				D321196E085C233C0931326AD57305D6 /* Pods-StockTracker.modulemap */,
+				2318012CD2D3E3B9567BA5A9C1603FF9 /* Pods-StockTracker-acknowledgements.markdown */,
+				FC75CDB714625667794A63D5A8BA4BCF /* Pods-StockTracker-acknowledgements.plist */,
+				52BD721BA850AB2B74A2B495B244B118 /* Pods-StockTracker-dummy.m */,
+				C689CE6591270C6BF490ABF9F3597782 /* Pods-StockTracker-frameworks.sh */,
+				45146E523B53517BA0576118CA1EB7E5 /* Pods-StockTracker-Info.plist */,
+				6165FC0994E5390300201D05174E4AD8 /* Pods-StockTracker-umbrella.h */,
+				8B5BECD17D8E9E12B752A5D79A262C4F /* Pods-StockTracker.debug.xcconfig */,
+				EE9314CF2B1818CFF163140214ABE7E7 /* Pods-StockTracker.release.xcconfig */,
+			);
+			name = "Pods-StockTracker";
+			path = "Target Support Files/Pods-StockTracker";
+			sourceTree = "<group>";
+		};
+		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E169A450ED27AC725DF52953F66D11E0 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		46746036451CC6091FA05C4D56F3EFFC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B9908A224951F01133C4349B179916A1 /* FSInteractiveMap.modulemap */,
+				37B29B7188A92F2A09348F162EA3CBC3 /* FSInteractiveMap.xcconfig */,
+				4FED805A18701970D455D263802B7153 /* FSInteractiveMap-dummy.m */,
+				45285971E730F973D76195907D5EDC43 /* FSInteractiveMap-Info.plist */,
+				69AA8DCC2E48A035AB6ACA904DD84F8A /* FSInteractiveMap-prefix.pch */,
+				EC199066418795461CD3424207BCFCF5 /* FSInteractiveMap-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/FSInteractiveMap";
+			sourceTree = "<group>";
+		};
+		4922A703566BC947944CC2688197A549 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1700D89346A39248791ABBBF49D69592 /* SwiftChart.modulemap */,
+				AC966FF52C9AD0969D7AA27117E9BF5B /* SwiftChart.xcconfig */,
+				32CECAEA8BA96EA2B69918A8C5D35DA6 /* SwiftChart-dummy.m */,
+				EADFDEDCD5E33ED1A11AA049CED70A25 /* SwiftChart-Info.plist */,
+				1941C1890C4059E515168438AF3FAC64 /* SwiftChart-prefix.pch */,
+				7586AB1FF998920CEB1787017997CE18 /* SwiftChart-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftChart";
+			sourceTree = "<group>";
+		};
+		4CD36FE174C6A589121A2E51957FDC9A /* SwiftChart */ = {
+			isa = PBXGroup;
+			children = (
+				34A6E61B258F3DFDA31A98C6A16F3FB6 /* Chart.swift */,
+				113F1CFE7117B2654D79CEA777963738 /* ChartColors.swift */,
+				B436F5F23DCE9007E02FDFF64BFFAB35 /* ChartSeries.swift */,
+				4922A703566BC947944CC2688197A549 /* Support Files */,
+			);
+			name = SwiftChart;
+			path = SwiftChart;
+			sourceTree = "<group>";
+		};
+		74C24EFDB2C413317CF4868F4B9EE422 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				006ABF88BC640E7F41CAACF1AEE5AF4B /* Pods-StockTracker */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		956D6343B545BBBEC1CCB9F6C32DF440 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4BE0D761BCB761B78CBE4B3710F193AC /* FSInteractiveMap.framework */,
+				BA38BC69FBD758EF7968FBC8D5BEC7E3 /* Pods_StockTracker.framework */,
+				7AB0DF9400B14EBBE1BD01780331A104 /* SwiftChart.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B61DE79D9913BE45D4D6856B91387B40 /* FSInteractiveMap */ = {
+			isa = PBXGroup;
+			children = (
+				E5F5471241755063832ABFA50B56DD97 /* FSInteractiveMapView.h */,
+				3A5E00D63781F4FBC731948AC6A0A651 /* FSInteractiveMapView.m */,
+				5410795C54D976791C5BB513DAFBE941 /* FSSVG.h */,
+				2B16B37B7547A0A0BF670D8147BF0B71 /* FSSVG.m */,
+				E49297E9B0359E42AAD490CB468B265E /* FSSVGPathElement.h */,
+				F6272A28373E9DD51E040772B6E6028A /* FSSVGPathElement.m */,
+				093A0A6B14191C3C2053D5BFB5B84CCD /* FSSVGUtils.h */,
+				3DA5CDDA02B9AEBFBE894FA1AD8DB664 /* FSSVGUtils.m */,
+				46746036451CC6091FA05C4D56F3EFFC /* Support Files */,
+			);
+			name = FSInteractiveMap;
+			path = FSInteractiveMap;
+			sourceTree = "<group>";
+		};
+		CAC71E9F19A6F9133AEF3C8E3C7D0C44 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B61DE79D9913BE45D4D6856B91387B40 /* FSInteractiveMap */,
+				4CD36FE174C6A589121A2E51957FDC9A /* SwiftChart */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
+				CAC71E9F19A6F9133AEF3C8E3C7D0C44 /* Pods */,
+				956D6343B545BBBEC1CCB9F6C32DF440 /* Products */,
+				74C24EFDB2C413317CF4868F4B9EE422 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		E169A450ED27AC725DF52953F66D11E0 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				40CB39E715FBCDAA142E6513E126200A /* Foundation.framework */,
+				ECF2A2B0720AE923C22BED3192888BE0 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2A5528693F580971FC6116FC7E613057 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF11916EF91D52A8EFD689521C7A627A /* Pods-StockTracker-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAFECBD04606CB9D8E38C9EEB611A3A0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AE903D69DE436016DEC7666F6F70972 /* SwiftChart-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDC25ECB5B10271939F14A8E961EB6BF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11B84B0D91843BAB9856B71D8E07EF2F /* FSInteractiveMap-umbrella.h in Headers */,
+				78BB7F5DE8471C9973389DC2B343B80F /* FSInteractiveMapView.h in Headers */,
+				12579086094A0FE91DEE72E386432E64 /* FSSVG.h in Headers */,
+				7C637AB5526B53A111BEC4BB07FB0B15 /* FSSVGPathElement.h in Headers */,
+				8690C327EBA839B1B5C572F406AC4401 /* FSSVGUtils.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5E244DA445A5F3270B458C5989175C44 /* FSInteractiveMap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 388713F267C0DCEB8A48EADB2F30C294 /* Build configuration list for PBXNativeTarget "FSInteractiveMap" */;
+			buildPhases = (
+				DDC25ECB5B10271939F14A8E961EB6BF /* Headers */,
+				D5BB1425DFE8A12471806F14FEB5E609 /* Sources */,
+				F0578D4E9DE83EB7785EE44809468309 /* Frameworks */,
+				936B0D1C305719CB3EDDA93490D611D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FSInteractiveMap;
+			productName = FSInteractiveMap;
+			productReference = 4BE0D761BCB761B78CBE4B3710F193AC /* FSInteractiveMap.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		EBE6C4048DA079A2D3E55862994D5D6E /* Pods-StockTracker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0C40EE806488C09B6A91D1AEC035FB55 /* Build configuration list for PBXNativeTarget "Pods-StockTracker" */;
+			buildPhases = (
+				2A5528693F580971FC6116FC7E613057 /* Headers */,
+				E20975C5F79091904CC20D06A2A50706 /* Sources */,
+				3C92AEB6129FA330F49CAFCE98AB3F4C /* Frameworks */,
+				9BBCB295FD2041992569621368B1EAF7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				478671D7C51F72968DEA737EF9C2366E /* PBXTargetDependency */,
+				D6BD23A5FB89E4A836A2DA1DC1E453EE /* PBXTargetDependency */,
+			);
+			name = "Pods-StockTracker";
+			productName = "Pods-StockTracker";
+			productReference = BA38BC69FBD758EF7968FBC8D5BEC7E3 /* Pods_StockTracker.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F1D8E7BACB55BD239BC5CF0C11143BBC /* SwiftChart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0081EA376AD77DE07DF81B475059A621 /* Build configuration list for PBXNativeTarget "SwiftChart" */;
+			buildPhases = (
+				DAFECBD04606CB9D8E38C9EEB611A3A0 /* Headers */,
+				364C42F4AE0C761D0EAAEF2089C01EE8 /* Sources */,
+				5A79A2E00441F70558FCBA0C2F80C447 /* Frameworks */,
+				FC44C72A3B8BF2DAE48F5CCC80FDD79B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftChart;
+			productName = SwiftChart;
+			productReference = 7AB0DF9400B14EBBE1BD01780331A104 /* SwiftChart.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 956D6343B545BBBEC1CCB9F6C32DF440 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5E244DA445A5F3270B458C5989175C44 /* FSInteractiveMap */,
+				EBE6C4048DA079A2D3E55862994D5D6E /* Pods-StockTracker */,
+				F1D8E7BACB55BD239BC5CF0C11143BBC /* SwiftChart */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		936B0D1C305719CB3EDDA93490D611D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BBCB295FD2041992569621368B1EAF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC44C72A3B8BF2DAE48F5CCC80FDD79B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		364C42F4AE0C761D0EAAEF2089C01EE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C182C7C3B245C50E53274D4BC1EC442 /* Chart.swift in Sources */,
+				15DFCBDCF7A9BF0F3ABE2D8FC1031D7A /* ChartColors.swift in Sources */,
+				EDC70AAE60A0FBCADEA9214239664A61 /* ChartSeries.swift in Sources */,
+				20CE242EF789F1CC0C9528958A0C1221 /* SwiftChart-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5BB1425DFE8A12471806F14FEB5E609 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B64F8BBC745271AACA4D95FAD410C175 /* FSInteractiveMap-dummy.m in Sources */,
+				0A8A072F2A9ADA6759666E270CEA93DD /* FSInteractiveMapView.m in Sources */,
+				2B91D12C6E2AE721AFD213EB155F1988 /* FSSVG.m in Sources */,
+				6819569C6289CD1E87EC9EDA4F146363 /* FSSVGPathElement.m in Sources */,
+				D7C71075DFB7B5A31C62417978114AC7 /* FSSVGUtils.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E20975C5F79091904CC20D06A2A50706 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E22429E05847890CDE86B6FF7B370AE /* Pods-StockTracker-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		478671D7C51F72968DEA737EF9C2366E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FSInteractiveMap;
+			target = 5E244DA445A5F3270B458C5989175C44 /* FSInteractiveMap */;
+			targetProxy = CF0B4213AFBC9D4C2C5BB5961125FA3A /* PBXContainerItemProxy */;
+		};
+		D6BD23A5FB89E4A836A2DA1DC1E453EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftChart;
+			target = F1D8E7BACB55BD239BC5CF0C11143BBC /* SwiftChart */;
+			targetProxy = E8EEA9F07E57568419E9621A963BEF7D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		081BC0E414FEB3101D07A923839FDADB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37B29B7188A92F2A09348F162EA3CBC3 /* FSInteractiveMap.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FSInteractiveMap/FSInteractiveMap-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FSInteractiveMap/FSInteractiveMap-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FSInteractiveMap/FSInteractiveMap.modulemap";
+				PRODUCT_MODULE_NAME = FSInteractiveMap;
+				PRODUCT_NAME = FSInteractiveMap;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0B26C4F658D59A5A77E3910E7BA656C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B5BECD17D8E9E12B752A5D79A262C4F /* Pods-StockTracker.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-StockTracker/Pods-StockTracker-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-StockTracker/Pods-StockTracker.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		183E96116BB2BA3896F575709716261A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC966FF52C9AD0969D7AA27117E9BF5B /* SwiftChart.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftChart/SwiftChart-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftChart/SwiftChart-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SwiftChart/SwiftChart.modulemap";
+				PRODUCT_MODULE_NAME = SwiftChart;
+				PRODUCT_NAME = SwiftChart;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		567CE85E46AE043A941823CDC3AB9D75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE9314CF2B1818CFF163140214ABE7E7 /* Pods-StockTracker.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-StockTracker/Pods-StockTracker-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-StockTracker/Pods-StockTracker.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9ABEE789AF11DDDDF0180C54309F64B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC966FF52C9AD0969D7AA27117E9BF5B /* SwiftChart.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftChart/SwiftChart-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftChart/SwiftChart-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SwiftChart/SwiftChart.modulemap";
+				PRODUCT_MODULE_NAME = SwiftChart;
+				PRODUCT_NAME = SwiftChart;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A105C1752A0A49B30ED621B71E226CDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		C1391485F05B41BD35738A433056B7FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		D978984CCC949F6FDE4A49452AC73803 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37B29B7188A92F2A09348F162EA3CBC3 /* FSInteractiveMap.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FSInteractiveMap/FSInteractiveMap-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FSInteractiveMap/FSInteractiveMap-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/FSInteractiveMap/FSInteractiveMap.modulemap";
+				PRODUCT_MODULE_NAME = FSInteractiveMap;
+				PRODUCT_NAME = FSInteractiveMap;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0081EA376AD77DE07DF81B475059A621 /* Build configuration list for PBXNativeTarget "SwiftChart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				183E96116BB2BA3896F575709716261A /* Debug */,
+				9ABEE789AF11DDDDF0180C54309F64B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0C40EE806488C09B6A91D1AEC035FB55 /* Build configuration list for PBXNativeTarget "Pods-StockTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B26C4F658D59A5A77E3910E7BA656C5 /* Debug */,
+				567CE85E46AE043A941823CDC3AB9D75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		388713F267C0DCEB8A48EADB2F30C294 /* Build configuration list for PBXNativeTarget "FSInteractiveMap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				081BC0E414FEB3101D07A923839FDADB /* Debug */,
+				D978984CCC949F6FDE4A49452AC73803 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C1391485F05B41BD35738A433056B7FA /* Debug */,
+				A105C1752A0A49B30ED621B71E226CDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

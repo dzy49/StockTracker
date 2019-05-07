@@ -1,0 +1,20 @@
+PODS:
+  - FSInteractiveMap (0.1.0)
+  - SwiftChart (1.0.1)
+
+DEPENDENCIES:
+  - FSInteractiveMap
+  - SwiftChart
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - FSInteractiveMap
+    - SwiftChart
+
+SPEC CHECKSUMS:
+  FSInteractiveMap: 43a8d1388056b21da95194528fc37e222c7dad50
+  SwiftChart: ba767a678d568a5ee22d419e146a0582865e1aff
+
+PODFILE CHECKSUM: eb05c7a3b053935f92a35dc1ec2cf11846ef5825
+
+COCOAPODS: 1.6.1
