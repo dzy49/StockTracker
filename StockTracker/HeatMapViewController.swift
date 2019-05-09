@@ -188,7 +188,7 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         //WorldMapView.frame.size
         WorldMapView.maximumZoomScale=4
         WorldMapView.minimumZoomScale=0.5
-        
+        MarketTableView.cornerRadius=7.5
         
     }
     

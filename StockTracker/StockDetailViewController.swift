@@ -29,8 +29,11 @@ extension UISegmentedControl {
 }
 
 class StockDetailViewController:UIViewController,ChartDelegate{
+    
+    @IBOutlet weak var PriceOutlet: UILabel!
+    @IBOutlet weak var ChangeOutlet: UILabel!
     func didFinishTouchingChart(_ chart: Chart) {
-        label.text = ""
+        label.text = " "
     }
     
     func didEndTouchingChart(_ chart: Chart) {
@@ -47,13 +50,16 @@ class StockDetailViewController:UIViewController,ChartDelegate{
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         StockChart.delegate=self
+        PriceOutlet.text="180.0"
         //labelLeadingMarginInitialConstant = labelLeadingMarginConstraint.constant
         var followbutton=UIBarButtonItem(title:"+ Follow", style: .plain, target: self, action: nil)
         self.navigationItem.rightBarButtonItem=followbutton
         followbutton.tintColor=UIColor.white
         self.tabBarController?.tabBar.isHidden = true
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.02414079942, green: 0.3943191767, blue: 0.429056108, alpha: 0.8470588235)
+        RangeControl.tintColor=#colorLiteral(red: 0.02414079942, green: 0.3943191767, blue: 0.429056108, alpha: 0.8470588235)
         self.title = "AAPL";
         self.navigationController?.navigationBar.titleTextAttributes=[NSAttributedString.Key.foregroundColor: UIColor.white]
         RangeControl.removeBorders()
