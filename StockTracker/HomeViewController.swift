@@ -37,7 +37,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         SavedTableViewOutlet.setEditing(!SavedTableViewOutlet.isEditing, animated: true)
         HeatMapViewController().updateMapColor()
     }
-    var saved:[(String,Double,Double)]=[("AAPL",11.1,3),("AAPL2",11.1,-3)]
+    var saved:[(String,Double,Double)]=[("AAPL",200.72,-2.18),("MSFT",110.11,3.11)]
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

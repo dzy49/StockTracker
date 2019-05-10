@@ -27,8 +27,8 @@ class model{
        getStockJson(symbol: "AAPL")
        // getStockJson(symbol: "NASDAQ:^IXIC")
        // getStockJson(symbol: "000001.SHH")
-        
     }
+    
     static func getSesssionDataTask(){
         let semaphore = DispatchSemaphore(value: 0)
         //->Double  {
@@ -224,7 +224,7 @@ class model{
                             }
                         }
                         // price=callback(dateprice: dateprice)
-                        semaphore.signal()
+                        //semaphore.signal()
                         group.leave()
                         
                     }
@@ -239,14 +239,7 @@ class model{
         task.resume()
         //var price=0.0
         
-        let timeout = DispatchTime.now() + .seconds(5)
-        
-        if semaphore.wait(timeout: timeout) == .timedOut {
-            failed=true
-            print("failed")
-        }else{
-           // callback(marketName:symbol,dateprice: dateprice)
-        }
+       
         
         //TODO
         //print("p:"+String(price))

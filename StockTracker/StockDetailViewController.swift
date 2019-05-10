@@ -52,7 +52,6 @@ class StockDetailViewController:UIViewController,ChartDelegate{
         super.viewDidLoad()
         
         StockChart.delegate=self
-        PriceOutlet.text="180.0"
         //labelLeadingMarginInitialConstant = labelLeadingMarginConstraint.constant
         var followbutton=UIBarButtonItem(title:"+ Follow", style: .plain, target: self, action: nil)
         self.navigationItem.rightBarButtonItem=followbutton
@@ -61,10 +60,13 @@ class StockDetailViewController:UIViewController,ChartDelegate{
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.02414079942, green: 0.3943191767, blue: 0.429056108, alpha: 0.8470588235)
         RangeControl.tintColor=#colorLiteral(red: 0.02414079942, green: 0.3943191767, blue: 0.429056108, alpha: 0.8470588235)
         self.title = "AAPL";
+        self.navigationController?.navigationBar.tintColor = UIColor.white;
         self.navigationController?.navigationBar.titleTextAttributes=[NSAttributedString.Key.foregroundColor: UIColor.white]
         RangeControl.removeBorders()
         model.LoadHeatMapData()
-        let series1 = ChartSeries(model.valueArr)
+        let lastthrity=(model.stockdict["AAPL"]?.count)!-30
+        let last=(model.stockdict["AAPL"]?.count)!-1
+        let series1 = ChartSeries(Array(model.valueArr[lastthrity..<last]))
         series1.color = ChartColors.darkGreenColor()
         series1.area = true
         print(model.valueArr)
@@ -72,12 +74,28 @@ class StockDetailViewController:UIViewController,ChartDelegate{
         //StockChart.xLabels = [0, 3, 6, 9, 12, 15, 18, 21, 24]
         //StockChart.xLabelsFormatter = { if($1<10){return String(Int(round($1))) }else {return ""}}
         //StockChart.showXLabelsAndGrid=false
-        var labels=[0.0, 22.0, 43.0, 64.0]
-        var labelsAsString=["a","b","c","d"]
+        var labels=[0.0,10,20]
+        var labelsAsString=["a","b","c"]
         StockChart.xLabels=labels
         StockChart.xLabelsFormatter = { (labelIndex: Int, labelValue: Double) -> String in
             return labelsAsString[labelIndex]
         }
+        let currprice=(model.stockdict["AAPL"]?[model.stockdict["AAPL"]!.count-1])!
+        let prevprice=(model.stockdict["AAPL"]?[model.stockdict["AAPL"]!.count-2])!
+        let change=currprice-prevprice
+        let pchange=(currprice-prevprice)/prevprice*100
+        PriceOutlet.text=String(currprice)
+        
+        ChangeOutlet.text=String(format: "%.2f",change)+"("+String(format: "%.2f", pchange)+"%)"
+        ChangeOutlet.layer.cornerRadius=5
+        ChangeOutlet.textColor=UIColor.white
+        if(change>=0){
+            ChangeOutlet.backgroundColor=UIColor.green
+        }else{
+            ChangeOutlet.backgroundColor=UIColor.red
+        }
+        //print(model.stockdict.count)
+
         // Do any additional setup after loading the view.
     }
     
@@ -88,15 +106,20 @@ class StockDetailViewController:UIViewController,ChartDelegate{
     
     @IBOutlet weak var SummaryHistorySwitch: UISegmentedControl!
     func didTouchChart(_ chart: Chart, indexes: Array<Int?>, x: Double, left: CGFloat) {
-        
         if let value = chart.valueForSeries(0, atIndex: indexes[0]) {
-            
             let numberFormatter = NumberFormatter()
             numberFormatter.minimumFractionDigits = 2
             numberFormatter.maximumFractionDigits = 2
-            label.text = model.stockdatedict["AAPL"]![indexes[0]!]+" "+numberFormatter.string(from: NSNumber(value: value))!
-            print(indexes)
-            print(model.stockdatedict["AAPL"]?.count)
+            let lastthrity=(model.stockdict["AAPL"]?.count)!-30
+            let last=(model.stockdict["AAPL"]?.count)!-1
+            let corrsArr=Array(model.stockdatedict["AAPL"]![lastthrity..<last])
+            let date_string = corrsArr[indexes[0]!]
+            let main_string = numberFormatter.string(from: NSNumber(value: value))!+" "+date_string
+            let range = (main_string as NSString).range(of: date_string)
+            let attribute = NSMutableAttributedString.init(string: main_string)
+            attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.lightGray , range: range)
+            //label.text = model.stockdatedict["AAPL"]![indexes[0]!]+" "+numberFormatter.string(from: NSNumber(value: value))!
+            label.attributedText=attribute
 
         }
     }
