@@ -9,6 +9,15 @@
 import UIKit
 import SwiftChart
 
+class NewsCell: UITableViewCell{
+    override func awakeFromNib() {
+        self.backgroundColor=#colorLiteral(red: 0.9374194741, green: 0.936938107, blue: 0.9586750865, alpha: 1)
+    }
+    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var publisher: UILabel!
+    
+}
 extension UISegmentedControl {
     func removeBorders() {
         setBackgroundImage(imageWithColor(color: UIColor.white), for: .normal, barMetrics: .default)
@@ -28,10 +37,40 @@ extension UISegmentedControl {
     }
 }
 
-class StockDetailViewController:UIViewController,ChartDelegate{
-    
+class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelegate,UITableViewDataSource{
     @IBOutlet weak var PriceOutlet: UILabel!
     @IBOutlet weak var ChangeOutlet: UILabel!
+    @IBOutlet weak var RangeControl: UISegmentedControl!
+    @IBOutlet weak var StockChart: Chart!
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var NewsTableView: UITableView!
+
+    var newsArr=[(title:String,date:String,pulisher:String)]()
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return newsArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = NewsTableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath)
+        if let myCell =  cell as? NewsCell {
+            myCell.date.text = newsArr[indexPath.row].date
+            myCell.title.text = newsArr[indexPath.row].title
+            myCell.publisher.text = newsArr[indexPath.row].pulisher
+            myCell.selectionStyle = UITableViewCell.SelectionStyle.none
+        }
+        print("??loaded")
+        return cell
+    }
+    
+    
+   
     func didFinishTouchingChart(_ chart: Chart) {
         label.text = " "
     }
@@ -41,11 +80,7 @@ class StockDetailViewController:UIViewController,ChartDelegate{
     }
     
     //@IBOutlet weak var AreaLineGraph: XAreaLineContainerView!
-    @IBOutlet weak var RangeControl: UISegmentedControl!
-    @IBOutlet weak var StockChart: Chart!
-    //@IBOutlet weak var labelLeadingMarginConstraint: NSLayoutConstraint!
-    @IBOutlet weak var label: UILabel!
-   // fileprivate var labelLeadingMarginInitialConstant: CGFloat!
+   
     var newView:UIView=UIView(frame: CGRect(x: 1, y:1, width: 1, height: 1))
     var button=UIButton(frame: CGRect(x: 1, y:1, width: 1, height: 1))
     var blackView=UIView(frame: CGRect(x: 1, y:1, width: 1, height: 1))
@@ -88,7 +123,10 @@ class StockDetailViewController:UIViewController,ChartDelegate{
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        newsArr.append((title: "this is a news about apple", date: "2077-01-06", pulisher: "me?"))
+        newsArr.append((title: "this is another news about apple", date: "2077-01-06", pulisher: "me again"))
+        NewsTableView.delegate=self
+        NewsTableView.dataSource=self
         let windowSize=CGSize(width: self.view.frame.width*0.7, height: self.view.frame.height/2)
         let windowPoint=CGPoint(x: self.view.frame.maxX*0.15, y: self.view.frame.maxY*0.2)
         let windowRect=CGRect(origin: windowPoint, size: windowSize)

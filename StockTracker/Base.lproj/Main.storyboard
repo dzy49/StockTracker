@@ -211,13 +211,78 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FeA-xD-FHE">
                                 <rect key="frame" x="15" y="426" width="384" height="382"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9xo-iz-Gmg">
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="382"/>
+                                        <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NewsCell" rowHeight="150" id="nCR-J2-Mp2" customClass="NewsCell" customModule="StockTracker" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="384" height="150"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nCR-J2-Mp2" id="c9Q-cC-wVk">
+                                                    <rect key="frame" x="0.0" y="0.0" width="384" height="150"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QzU-J0-mkr">
+                                                            <rect key="frame" x="0.0" y="15" width="384" height="135"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ia1-Jr-PtA">
+                                                                    <rect key="frame" x="15" y="8" width="321" height="60"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="23"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Publisher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFa-02-FSV">
+                                                                    <rect key="frame" x="143" y="99" width="179" height="21"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jcl-x0-75n">
+                                                                    <rect key="frame" x="13" y="98" width="122" height="21"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="6"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="QzU-J0-mkr" secondAttribute="bottom" id="9Os-Ug-oBu"/>
+                                                        <constraint firstItem="QzU-J0-mkr" firstAttribute="top" secondItem="c9Q-cC-wVk" secondAttribute="top" constant="15" id="G1V-Bh-aA3"/>
+                                                        <constraint firstAttribute="trailing" secondItem="QzU-J0-mkr" secondAttribute="trailing" id="dRg-NF-xfK"/>
+                                                        <constraint firstItem="QzU-J0-mkr" firstAttribute="leading" secondItem="c9Q-cC-wVk" secondAttribute="leading" id="wHe-kQ-dNM"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="date" destination="jcl-x0-75n" id="9uT-Wo-TbH"/>
+                                                    <outlet property="publisher" destination="JFa-02-FSV" id="44u-ca-BM5"/>
+                                                    <outlet property="title" destination="ia1-Jr-PtA" id="kfH-XQ-AUU"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.3242391348" green="0.52148741480000005" blue="0.96867269280000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
+                                    <constraint firstItem="9xo-iz-Gmg" firstAttribute="top" secondItem="FeA-xD-FHE" secondAttribute="top" id="9KD-Uw-Qes"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="RP9-mo-GrY"/>
+                                    <constraint firstAttribute="trailing" secondItem="9xo-iz-Gmg" secondAttribute="trailing" id="XFt-oz-mzQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="9xo-iz-Gmg" secondAttribute="bottom" id="egl-Vn-ZdW"/>
+                                    <constraint firstItem="9xo-iz-Gmg" firstAttribute="leading" secondItem="FeA-xD-FHE" secondAttribute="leading" id="jEu-YL-ap9"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="FeA-xD-FHE" firstAttribute="leading" secondItem="Gug-cX-rls" secondAttribute="leading" constant="15" id="A9o-uR-vdB"/>
                             <constraint firstItem="ZNA-PH-o6d" firstAttribute="top" secondItem="2WK-Yv-4uI" secondAttribute="bottom" constant="15" id="Ao4-N7-wB8"/>
@@ -240,6 +305,7 @@
                     </view>
                     <connections>
                         <outlet property="ChangeOutlet" destination="SV0-g5-AjE" id="gW9-rV-EV0"/>
+                        <outlet property="NewsTableView" destination="9xo-iz-Gmg" id="RQw-Dd-gk1"/>
                         <outlet property="PriceOutlet" destination="0xQ-1g-M3K" id="bFl-yY-VfC"/>
                         <outlet property="RangeControl" destination="2WK-Yv-4uI" id="kZN-O2-orY"/>
                         <outlet property="StockChart" destination="aBL-HT-TOC" id="NbM-Nb-572"/>
