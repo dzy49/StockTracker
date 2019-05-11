@@ -153,27 +153,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="X0b-aP-T77">
-                                <rect key="frame" x="15" y="98" width="249" height="40"/>
+                                <rect key="frame" x="15" y="98" width="369" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xQ-1g-M3K">
-                                        <rect key="frame" x="0.0" y="1.5" width="116" height="37.5"/>
+                                        <rect key="frame" x="0.0" y="1.5" width="117.5" height="37.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="31"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="68.5" translatesAutoresizingMaskIntoConstraints="NO" id="SV0-g5-AjE">
-                                        <rect key="frame" x="136" y="8.5" width="113" height="23"/>
+                                        <rect key="frame" x="137.5" y="8.5" width="101" height="23"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="19"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAi-cb-Q8e">
+                                        <rect key="frame" x="258.5" y="5" width="110.5" height="30"/>
+                                        <state key="normal" title="Setting"/>
+                                        <connections>
+                                            <action selector="SettingButton:" destination="kQI-mi-XAH" eventType="touchUpInside" id="JJ8-xa-wNe"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="sPe-ru-DGn"/>
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZNA-PH-o6d">
-                                <rect key="frame" x="117" y="191.5" width="203" height="20"/>
+                                <rect key="frame" x="117" y="191.5" width="203" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="hHs-6Q-CX7"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -193,17 +203,17 @@
                                 </segments>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aBL-HT-TOC" customClass="Chart" customModule="SwiftChart">
-                                <rect key="frame" x="15" y="223" width="384" height="200"/>
+                                <rect key="frame" x="15" y="218" width="384" height="200"/>
                                 <color key="backgroundColor" white="0.3085134846" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="800" constant="200" id="9q3-NA-uor"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FeA-xD-FHE">
-                                <rect key="frame" x="15" y="431" width="384" height="377"/>
+                                <rect key="frame" x="15" y="426" width="384" height="382"/>
                                 <color key="backgroundColor" red="0.3242391348" green="0.52148741480000005" blue="0.96867269280000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="RP9-mo-GrY"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="RP9-mo-GrY"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -220,7 +230,7 @@
                             <constraint firstItem="X0b-aP-T77" firstAttribute="top" secondItem="Gug-cX-rls" secondAttribute="top" constant="10" id="JcO-Mq-6m9"/>
                             <constraint firstItem="ZNA-PH-o6d" firstAttribute="leading" secondItem="Gug-cX-rls" secondAttribute="leading" constant="117" id="PUS-Lg-NXb"/>
                             <constraint firstItem="Gug-cX-rls" firstAttribute="trailing" secondItem="FeA-xD-FHE" secondAttribute="trailing" constant="15" id="lf4-dQ-Dwi"/>
-                            <constraint firstItem="Gug-cX-rls" firstAttribute="trailing" secondItem="X0b-aP-T77" secondAttribute="trailing" constant="150" id="n6n-R9-RL5"/>
+                            <constraint firstItem="Gug-cX-rls" firstAttribute="trailing" secondItem="X0b-aP-T77" secondAttribute="trailing" constant="30" id="n6n-R9-RL5"/>
                             <constraint firstItem="Gug-cX-rls" firstAttribute="trailing" secondItem="ZNA-PH-o6d" secondAttribute="trailing" constant="94" id="nlh-AE-cLM"/>
                             <constraint firstItem="aBL-HT-TOC" firstAttribute="top" secondItem="ZNA-PH-o6d" secondAttribute="bottom" constant="11.5" id="qJb-Cc-qiy"/>
                             <constraint firstItem="aBL-HT-TOC" firstAttribute="leading" secondItem="Gug-cX-rls" secondAttribute="leading" constant="15" id="uSR-Qx-EzC"/>
@@ -243,7 +253,7 @@
         <!--HeatMap-->
         <scene sceneID="xea-U0-1Db">
             <objects>
-                <viewController id="saj-h2-WcG" customClass="HeatMapViewController" customModule="StockTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HeatMapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="saj-h2-WcG" customClass="HeatMapViewController" customModule="StockTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vD0-nw-5ui">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
