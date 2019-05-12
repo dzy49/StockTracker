@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		372BE02F228732B3006B533D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372BE02E228732B3006B533D /* SearchViewController.swift */; };
 		6C99B87E743D23864AF94F0B /* Pods_StockTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E775AC013F0EAE70335AD62A /* Pods_StockTracker.framework */; };
 		8B02A8A6226FB9CA00E3C114 /* world-low.svg in Resources */ = {isa = PBXBuildFile; fileRef = 8B02A8A5226FB9CA00E3C114 /* world-low.svg */; };
 		8BB8A633226625A400C49A41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8A632226625A400C49A41 /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		312CE0A45259FF8E1C8E3FD5 /* Pods-StockTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StockTracker.debug.xcconfig"; path = "Target Support Files/Pods-StockTracker/Pods-StockTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		372BE02E228732B3006B533D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8B02A8A5226FB9CA00E3C114 /* world-low.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "world-low.svg"; sourceTree = "<group>"; };
 		8B0EDBD2226FB319003BE757 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
 		8B7C2A48226FB1DE00C0DF19 /* libFSInteractiveMap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFSInteractiveMap.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +87,7 @@
 				8BB8A639226625A500C49A41 /* Assets.xcassets */,
 				8BB8A63B226625A500C49A41 /* LaunchScreen.storyboard */,
 				8BB8A63E226625A500C49A41 /* Info.plist */,
+				372BE02E228732B3006B533D /* SearchViewController.swift */,
 			);
 			path = StockTracker;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BB8A654226D7C7000C49A41 /* StockDetailViewController.swift in Sources */,
+				372BE02F228732B3006B533D /* SearchViewController.swift in Sources */,
 				8BB8A635226625A400C49A41 /* ViewController.swift in Sources */,
 				8BB8A6452266428300C49A41 /* model.swift in Sources */,
 				8BC4C4A8226FA63F00771E17 /* HeatMapViewController.swift in Sources */,

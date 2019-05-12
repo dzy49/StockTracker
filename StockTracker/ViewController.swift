@@ -12,7 +12,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let barItem = UITabBarItem(tabBarSystemItem: .search, tag: 2)
+
         // Do any additional setup after loading the view, typically from a nib.
+//        self.tabBarController?.tabBar.items?[0] = UITabBarItem.SystemItem.home
+//        self.tabBarController?.tabBar.items?[2] = UITabBarItem.SystemItem.search
         getSesssionDataTask()
     }
     

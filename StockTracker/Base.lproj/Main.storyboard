@@ -118,6 +118,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="KsW-sz-eJu"/>
                                 </constraints>
+                                <color key="barTintColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
@@ -142,7 +143,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-284.05797101449275" y="577.90178571428567"/>
+            <point key="canvasLocation" x="-1159" y="987"/>
         </scene>
         <!--Stock Detail View Controller-->
         <scene sceneID="mme-iR-cTc">
@@ -314,7 +315,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Eh-zf-dYQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="815.94202898550736" y="724.55357142857144"/>
+            <point key="canvasLocation" x="-119" y="1130"/>
         </scene>
         <!--HeatMap-->
         <scene sceneID="xea-U0-1Db">
@@ -486,21 +487,78 @@
             </objects>
             <point key="canvasLocation" x="-76" y="-252"/>
         </scene>
-        <!--Profolio-->
+        <!--Search-->
         <scene sceneID="2rU-wy-olt">
             <objects>
-                <viewController id="V2y-Ap-lbj" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3Z2-pj-kGs">
+                <viewController id="V2y-Ap-lbj" customClass="SearchViewController" customModule="StockTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Z2-pj-kGs" customClass="Ser">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" fixedFrame="YES" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="htn-LB-7IP">
+                                <rect key="frame" x="0.0" y="84" width="414" height="56"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.5490196078431373" green="0.87450980392156863" blue="0.87450980392156863" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="V2y-Ap-lbj" id="hc2-d9-dhN"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="136-tM-d91">
+                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searched" textLabel="aNv-RY-VDT" style="IBUITableViewCellStyleDefault" id="w5l-xM-WvB">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w5l-xM-WvB" id="ao4-MV-NBM">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aNv-RY-VDT">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="V2y-Ap-lbj" id="6wL-Ze-6q9"/>
+                                    <outlet property="delegate" destination="V2y-Ap-lbj" id="fj6-NO-cXy"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="136-tM-d91" firstAttribute="leading" secondItem="lad-rw-KZ9" secondAttribute="leading" id="AjF-32-OBv"/>
+                            <constraint firstItem="136-tM-d91" firstAttribute="trailing" secondItem="lad-rw-KZ9" secondAttribute="trailing" id="dNV-xx-liu"/>
+                            <constraint firstItem="136-tM-d91" firstAttribute="bottom" secondItem="lad-rw-KZ9" secondAttribute="bottom" id="qsh-U4-RNd"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="lad-rw-KZ9"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profolio" id="NqZ-Oj-92u"/>
+                    <tabBarItem key="tabBarItem" title="Search" id="NqZ-Oj-92u"/>
+                    <connections>
+                        <outlet property="searchBar" destination="htn-LB-7IP" id="HLS-Oa-9wC"/>
+                        <outlet property="searchDisplayController" destination="sCf-ej-7V4" id="ffb-ki-k7K"/>
+                        <outlet property="searchTable" destination="136-tM-d91" id="5J2-UP-Hh3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uc8-WE-Ta1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="sCf-ej-7V4">
+                    <connections>
+                        <outlet property="delegate" destination="V2y-Ap-lbj" id="8go-xr-vEX"/>
+                        <outlet property="searchBar" destination="htn-LB-7IP" id="Vk2-O1-UBx"/>
+                        <outlet property="searchContentsController" destination="V2y-Ap-lbj" id="7nY-wg-V6J"/>
+                        <outlet property="searchResultsDataSource" destination="V2y-Ap-lbj" id="AKk-cx-649"/>
+                        <outlet property="searchResultsDelegate" destination="V2y-Ap-lbj" id="KCh-fI-FZ3"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-1159" y="-10"/>
+            <point key="canvasLocation" x="873.91304347826099" y="809.59821428571422"/>
         </scene>
     </scenes>
     <resources>

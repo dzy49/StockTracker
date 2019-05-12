@@ -18,6 +18,7 @@ class StockCell: UITableViewCell{
     
 
 }
+
 extension UITableView {
     public var cornerRadius: CGFloat {
         get {
@@ -27,6 +28,14 @@ extension UITableView {
             layer.cornerRadius = newValue
             layer.masksToBounds = true
         }
+    }
+}
+
+let searchController = UISearchController(searchResultsController: nil)
+extension HomeViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        // TODO
     }
 }
 
@@ -65,6 +74,9 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             myCell.selectionStyle = UITableViewCell.SelectionStyle.none
             myCell.change.layer.masksToBounds = true
             myCell.change.layer.cornerRadius = 4
+            myCell.change.textAlignment = .center
+            myCell.price.textAlignment = .center
+            
         }
         return cell
     }
@@ -85,6 +97,11 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         //self.navigationItem.rightBarButtonItem = self.editButtonItem
 
         // Do any additional setup after loading the view.
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
 
