@@ -48,6 +48,7 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
     @IBOutlet weak var NewsTableView: UITableView!
     var symbolName:String=""
     var fullName=""
+    var followbutton=UIBarButtonItem()
     var newsArr=[(title:String,date:String,pulisher:String)]()
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -110,6 +111,16 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         super.viewDidLayoutSubviews()
         
     }
+    @objc func followPressed(sender: UIButton!) {
+        print("aa")
+        let defaults = UserDefaults.standard
+        // let arr=[(String,String)]()
+        var dict:[String:String]=defaults.dictionary(forKey: "saved") as! [String: String]
+        dict[symbolName]=fullName
+        defaults.set(dict,forKey: "saved")
+        followbutton.title="Following"
+    }
+    
     @objc func buttonAction(sender: UIButton!) {
         let btnsendtag: UIButton = sender
         if btnsendtag.tag == 1 {
@@ -157,7 +168,9 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         blackView.isHidden=true
         StockChart.delegate=self
         //labelLeadingMarginInitialConstant = labelLeadingMarginConstraint.constant
-        var followbutton=UIBarButtonItem(title:"+ Follow", style: .plain, target: self, action: nil)
+        followbutton=UIBarButtonItem(title:"+ Follow", style: .plain, target: self, action: nil)
+        followbutton.target = self;
+        followbutton.action = #selector(followPressed);
         self.navigationItem.rightBarButtonItem=followbutton
         followbutton.tintColor=UIColor.white
         self.tabBarController?.tabBar.isHidden = true

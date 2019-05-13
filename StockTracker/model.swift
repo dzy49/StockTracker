@@ -163,6 +163,9 @@ class model{
             //.map{$1}
         //print(sortedArray)
         valueArr.removeAll()
+        if(sortedArray.isEmpty){
+            return
+        }
     let lastdayprice=sortedArray[sortedArray.count-1].1.first?.value
     let lastwodayprice=sortedArray[sortedArray.count-2].1.first?.value
     let change=Double(lastdayprice!)!-Double(lastwodayprice!)!

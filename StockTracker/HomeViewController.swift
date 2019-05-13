@@ -11,11 +11,13 @@ import UIKit
 class StockCell: UITableViewCell{
     override func awakeFromNib() {
         self.backgroundColor=UIColor.lightGray
+        self.selectionStyle = .none
     }
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var change: UILabel!
     @IBOutlet weak var fullName: UILabel!
+    
 }
 
 extension UITableView {
@@ -38,15 +40,16 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     @IBAction func EditAction(_ sender: UIButton) {
         SavedTableViewOutlet.setEditing(!SavedTableViewOutlet.isEditing, animated: true)
-        HeatMapViewController().updateMapColor()
     }
-    var saved:[(String,Double,Double)]=[("AAPL",200.72,-2.18),("MSFT",110.11,3.11)]
+    var saved:[(String,Double,Double)]=[("AAPL",0.0,-0.0),("MSFT",0.0,-0.0)]
+    var actsaved:[String:String]=["AAPL":"Apple lnc","MSFT":"Microsoft"]
+    var orderedsaved=[Int: [String: String]]()
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return saved.count
+        return actsaved.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -55,11 +58,20 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SavedTableViewOutlet.dequeueReusableCell(withIdentifier: "StockCell", for: indexPath)
         if let myCell =  cell as? StockCell {
-            myCell.name.text = saved[indexPath.row].0
-            myCell.price.text = String(saved[indexPath.row].1)
-            var percentString = String(saved[indexPath.row].2)
-            percentString.append("%")
-            myCell.change.text = percentString
+            print(orderedsaved)
+            myCell.name.text = orderedsaved[indexPath.row]?.first?.key
+            //myCell.price.text = String(saved[indexPath.row].1)
+            let name=myCell.name.text!
+            if(model.stockdict[name] != nil){
+                let currprice=(model.stockdict[name]?[model.stockdict[name]!.count-1])!
+                let prevprice=(model.stockdict[name]?[model.stockdict[name]!.count-2])!
+                let change=currprice-prevprice
+                let pchange=(currprice-prevprice)/prevprice*100
+                myCell.price.text = String(currprice)
+            }
+//            var percentString = String(saved[indexPath.row].2)
+//            percentString.append("%")
+           /*myCell.change.text = percentString
             if(saved[indexPath.row].2>0){
                 myCell.change.backgroundColor = UIColor(red: 0, green: 0.7556203008, blue: 0.1655870676, alpha: 1)
             }else{
@@ -68,6 +80,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             myCell.selectionStyle = UITableViewCell.SelectionStyle.none
             myCell.change.layer.masksToBounds = true
             myCell.change.layer.cornerRadius = 4
+ */
         }
         return cell
     }
@@ -82,7 +95,33 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         tabBarController?.tabBar.barTintColor = UIColor.black
         tabBarController?.tabBar.tintColor = UIColor.white
         SavedTableViewOutlet.cornerRadius=7.5
+        let defaults = UserDefaults.standard
+        // let arr=[(String,String)]()
+        if (defaults.dictionary(forKey: "saved")==nil){
+            defaults.set(actsaved,forKey: "saved")
+        }else{
+            actsaved=defaults.dictionary(forKey: "saved") as! [String : String]
+            var myDictionary = [Int: [String: String]]()
+            var i=0
+            for saved in actsaved{
+                let newDic=[saved.key:saved.value]
+                myDictionary[i]=newDic
+                i=i+1
+            }
+            orderedsaved=myDictionary
+        }
         
+        for  stock in actsaved {
+            if(model.stockdict[stock.key]==nil){
+                model.getStockJson2WCH(symbol:stock.key){
+                    _ in
+                    print("reloaded")
+                    DispatchQueue.main.async {
+                        self.SavedTableViewOutlet.reloadData()
+                    }
+                }
+            }
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         if(shouldGotoDetailView){
@@ -90,6 +129,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             performSegue(withIdentifier: "Detail", sender: nil)
         }
         self.tabBarController?.tabBar.isHidden = false
+        
     }
     @IBOutlet weak var SavedTableViewOutlet: UITableView!
     
@@ -97,9 +137,31 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         super.viewDidLoad()
         SavedTableViewOutlet.delegate=self
         SavedTableViewOutlet.dataSource=self
-        //self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let defaults = UserDefaults.standard
+       // let arr=[(String,String)]()
+        if (defaults.dictionary(forKey: "saved")==nil){
+            defaults.set(actsaved,forKey: "saved")
+        }else{
+            actsaved=defaults.dictionary(forKey: "saved") as! [String : String]
+            var myDictionary = [Int: [String: String]]()
+            var i=0
+            for saved in actsaved{
+                let newDic=[saved.key:saved.value]
+                myDictionary[i]=newDic
+                i=i+1
+            }
+            orderedsaved=myDictionary
+        }
         
-        // Do any additional setup after loading the view.
+        for  stock in actsaved {
+            model.getStockJson2WCH(symbol:stock.key){
+                _ in
+                print("reloaded")
+                DispatchQueue.main.async {
+                    self.SavedTableViewOutlet.reloadData()
+                }
+            }
+        }
     }
     
    
