@@ -38,6 +38,7 @@ class SearchViewController:UIViewController,UITableViewDataSource,UITableViewDel
     @IBOutlet weak var SearchResultTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         SearchResultTable.delegate=self
         SearchResultTable.dataSource=self
         SearchBar.becomeFirstResponder()

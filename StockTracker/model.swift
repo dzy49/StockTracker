@@ -23,6 +23,7 @@ class model{
     static var supportedCountry=["US","CN","IN","JP","GB","BR","AU","CA","DE"]
     static var countryFullName=["US":"United States","CN":"China","IN":"India","JP":"Japan","GB":"United Kingdom","BR":"Brazil","AU":"Autralia","CA":"Candana","DE":"German"]
     static var stockFullName=["^DJI":"Dow 30"]
+    static var newsDict=[String:[(title:String,date:String,source:String,url:String,sentiment:String)]]()
     static var searchResultDict=[String:[(symName:String,fulName:String)]]()
     static func LoadHeatMapData(){
     
@@ -85,70 +86,6 @@ class model{
        
     }
     
-    static func getStockJson(symbol:String){
-        let semaphore = DispatchSemaphore(value: 0)
-        var baseUrl="https://www.alphavantage.co/query?function=TIME_SERIES_Daily&symbol="
-        let apiKey="&apikey=2VBS7C3YUNCMDA0M"
-        var dateprice=[String:String]()
-        
-        
-        let url = baseUrl+symbol+apiKey
-        let urlStr : NSString = url.addingPercentEncoding(withAllowedCharacters:.urlQueryAllowed) as! NSString
-       // let searchURL : NSURL = NSURL(string: urlStr as String)!
-        //print(searchURL)
-        
-        
-        let sess=URLSession.shared
-        let urls:NSURL=NSURL.init(string: urlStr as String)!
-        let request:URLRequest=NSURLRequest.init(url: urls as URL) as URLRequest
-        let group = DispatchGroup()
-        group.enter()
-        let task = sess.dataTask(with: request){(data, res, error) in
-            
-            if(error==nil){
-                do{
-                    let dict = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
-                    //print(dict)
-                    if let time = dict["Time Series (Daily)"] as? NSDictionary  {
-                        for (key, value) in time {
-                            if let value = value as? Dictionary<String, String> {
-                                if let close = value["4. close"] {
-                                    let i = key as! String
-                                    dateprice[i]=close
-                                    //("\(key) CloseStock-> \(close)")
-                                    //price = callback(dateprice: dateprice)
-                                }
-                            }
-                        }
-                        
-                        // price=callback(dateprice: dateprice)
-                        semaphore.signal()
-                        group.leave()
-                        
-                    }
-                    
-                }catch{
-                    print(error.localizedDescription)
-                    
-                }
-            }
-        }
-        task.resume()
-        //var price=0.0
-        
-        let timeout = DispatchTime.now() + .seconds(5)
-        
-        if semaphore.wait(timeout: timeout) == .timedOut {
-            failed=true
-            print("failed")
-        }else{
-           callback(marketName:symbol,dateprice: dateprice)
-        }
-        
-        //TODO
-        //print("p:"+String(price))
-        
-    }
    
     static func callback(marketName:String,dateprice:[String:String]){
         //->Double{
@@ -182,7 +119,7 @@ class model{
         }
         stockdict[marketName]=valueArr
         stockdatedict[marketName]=dateArr
-        print(dateArr)
+        //print(dateArr)
         
 
 
@@ -194,6 +131,7 @@ class model{
     }
     
     static func getStockJson2WCH(symbol:String,completionHandler:@escaping (_ success:Bool) -> Void){
+        print("APICall")
         let semaphore = DispatchSemaphore(value: 0)
         var baseUrl="https://www.alphavantage.co/query?function=TIME_SERIES_Daily&symbol="
         let apiKey="&apikey=2VBS7C3YUNCMDA0M"
@@ -253,6 +191,7 @@ class model{
     
     
     static func getStockIndexInfo(symbol:String,completionHandler:@escaping (_ success:Bool) -> Void){
+        print("APICall")
         let semaphore = DispatchSemaphore(value: 0)
         var baseUrl="https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="
         let apiKey="&apikey=2VBS7C3YUNCMDA0M"
@@ -315,7 +254,79 @@ class model{
         //print("p:"+String(price))
         
     }
+    
+    static func getStockNews(symbol:String,completionHandler:@escaping (_ success:Bool) -> Void){
+        let baseUrl="https://stocknewsapi.com/api/v1?tickers="
+        let apiKey="&items=20&date=03102019-03102019&token=9rsoblans5vmzllpw0vubcqlmmwttxabmalsdnxs"
+        var dateprice=[String:String]()
+        let url = baseUrl+symbol+apiKey
+        let urlStr : NSString = url.addingPercentEncoding(withAllowedCharacters:.urlQueryAllowed) as! NSString
+        let sess=URLSession.shared
+        let urls:NSURL=NSURL.init(string: urlStr as String)!
+        let request:URLRequest=NSURLRequest.init(url: urls as URL) as URLRequest
+
+        let task = sess.dataTask(with: request){(data, res, error) in
+            if(error==nil){
+                do{
+                    let dict = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
+                    print(dict)
+                    if let info = dict["data"] as? [NSDictionary] {
+                        print(info)
+                        newsDict[symbol]=[(String,String,String,String,String)]()
+                        for news in info{
+                            if let title = news["title"] {
+                                if let sentiment = news["sentiment"] {
+                                    if let url = news["news_url"]{
+                                        if let source = news["source_name"]{
+                                            if let date = news["date"]{
+                                                    newsDict[symbol]?.append((title:title as! String,date:date as! String,source as! String,url:url as! String,sentiment: sentiment as! String))
+                                             
+                        
+                                                print(newsDict)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        
+                        
+                        
+                        //("\(key) CloseStock-> \(close)")
+                        //price = callback(dateprice: dateprice)
+                        
+                    }
+                    
+                    // price=callback(dateprice: dateprice)
+                    
+                    
+                    //callback(marketName: symbol, dateprice: dateprice)
+                    completionHandler(true)
+                }catch{
+                    print(error.localizedDescription)
+                    
+                }
+            }
+        }
+        task.resume()
+        //var price=0.0
+        
+        let timeout = DispatchTime.now() + .seconds(5)
+        
+        //if semaphore.wait(timeout: timeout) == .timedOut {
+        //failed=true
+        //  print("failed")
+        //}else{
+        // callback(marketName:symbol,dateprice: dateprice)
+        //}
+        
+        //TODO
+        //print("p:"+String(price))
+        
+    }
     static func getSearchResult(symbol:String,completionHandler:@escaping (_ success:Bool) -> Void){
+        print("APICall")
         let baseUrl="https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="
         let apiKey="&apikey=2VBS7C3YUNCMDA0M"
         let url = baseUrl+symbol+apiKey

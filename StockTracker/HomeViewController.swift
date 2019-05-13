@@ -58,7 +58,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SavedTableViewOutlet.dequeueReusableCell(withIdentifier: "StockCell", for: indexPath)
         if let myCell =  cell as? StockCell {
-            print(orderedsaved)
+            //print(orderedsaved)
             myCell.name.text = orderedsaved[indexPath.row]?.first?.key
             //myCell.price.text = String(saved[indexPath.row].1)
             let name=myCell.name.text!
@@ -67,8 +67,10 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
                 let prevprice=(model.stockdict[name]?[model.stockdict[name]!.count-2])!
                 let change=currprice-prevprice
                 let pchange=(currprice-prevprice)/prevprice*100
-                myCell.price.text = String(currprice)
+                let str = NSString(format: "%.2f", currprice)
+                myCell.price.text = str as String
             }
+            myCell.fullName.text=orderedsaved[indexPath.row]?.first?.value
 //            var percentString = String(saved[indexPath.row].2)
 //            percentString.append("%")
            /*myCell.change.text = percentString
@@ -110,7 +112,8 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             }
             orderedsaved=myDictionary
         }
-        
+        SavedTableViewOutlet.reloadData()
+
         for  stock in actsaved {
             if(model.stockdict[stock.key]==nil){
                 model.getStockJson2WCH(symbol:stock.key){
@@ -154,11 +157,13 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         }
         
         for  stock in actsaved {
-            model.getStockJson2WCH(symbol:stock.key){
-                _ in
-                print("reloaded")
-                DispatchQueue.main.async {
-                    self.SavedTableViewOutlet.reloadData()
+            if(model.stockdict[stock.key]==nil){
+                model.getStockJson2WCH(symbol:stock.key){
+                    _ in
+                        print("reloaded")
+                        DispatchQueue.main.async {
+                            self.SavedTableViewOutlet.reloadData()
+                        }
                 }
             }
         }

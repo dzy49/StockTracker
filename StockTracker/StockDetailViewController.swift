@@ -49,7 +49,7 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
     var symbolName:String=""
     var fullName=""
     var followbutton=UIBarButtonItem()
-    var newsArr=[(title:String,date:String,pulisher:String)]()
+    var newsArr=[(title:String,date:String,pulisher:String,sentiment:String)]()
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
@@ -58,16 +58,23 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsArr.count
+        if(model.newsDict[symbolName]==nil){
+            return 0
+        }else{
+            return (model.newsDict[symbolName]?.count)!
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = NewsTableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath)
         if let myCell =  cell as? NewsCell {
-            myCell.date.text = newsArr[indexPath.row].date
-            myCell.title.text = newsArr[indexPath.row].title
-            myCell.publisher.text = newsArr[indexPath.row].pulisher
+           
             myCell.selectionStyle = UITableViewCell.SelectionStyle.none
+            myCell.date.text = model.newsDict[symbolName]?[indexPath.row].date
+            myCell.title.text = model.newsDict[symbolName]?[indexPath.row].title
+            myCell.publisher.text = model.newsDict[symbolName]?[indexPath.row].source
+            myCell.title.adjustsFontSizeToFitWidth = true
+            myCell.title.minimumScaleFactor = 0.2
         }
         print("??loaded")
         return cell
@@ -134,15 +141,30 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         blackView.isHidden = !blackView.isHidden
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let fetchurl=model.newsDict[symbolName]![indexPath.row].url
+            if let url = URL(string: fetchurl),
+            UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:])
+            }
+        
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         SymbolNameOuelet.text=symbolName
         FullNameOutlet.text=fullName;
-        newsArr.append((title: "this is a news about apple", date: "2077-01-06", pulisher: "me?"))
-        newsArr.append((title: "this is another news about apple", date: "2077-01-06", pulisher: "me again"))
+        //newsArr.append((title: "this is a news about apple", date: "2077-01-06", pulisher: "me?"))
+        //newsArr.append((title: "this is another news about apple", date: "2077-01-06", pulisher: "me again"))
         NewsTableView.delegate=self
         NewsTableView.dataSource=self
+        model.getStockNews(symbol:symbolName){
+            _ in
+            DispatchQueue.main.async {
+                self.NewsTableView.reloadData()
+            }
+        }
         let windowSize=CGSize(width: self.view.frame.width*0.7, height: self.view.frame.height/2)
         let windowPoint=CGPoint(x: self.view.frame.maxX*0.15, y: self.view.frame.maxY*0.2)
         let windowRect=CGRect(origin: windowPoint, size: windowSize)
@@ -182,12 +204,21 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         RangeControl.removeBorders()
         model.getStockJson2WCH(symbol:symbolName){
             _ in
+            if(model.stockdict[self.symbolName]==nil||model.stockdict[self.symbolName]!.count<30){
+                  DispatchQueue.main.async {
+                    self.PriceOutlet.text="Error"
+                    self.PriceOutlet.textColor=UIColor.red
+                    self.ChangeOutlet.text="Error loading"
+                    self.ChangeOutlet.layer.cornerRadius=5
+                    self.ChangeOutlet.textColor=UIColor.red
+                }
+            }else{
             let lastthrity=(model.stockdict[self.symbolName]?.count)!-30
             let last=(model.stockdict[self.symbolName]?.count)!-1
             let series1 = ChartSeries(Array(model.valueArr[lastthrity..<last]))
             series1.color = ChartColors.darkGreenColor()
             series1.area = true
-            print(model.valueArr)
+           // print(model.valueArr)
             DispatchQueue.main.async {
             self.StockChart.add([series1])
             }
@@ -215,7 +246,7 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
                     self.ChangeOutlet.backgroundColor=UIColor.red
                 }
             }
-            
+            }
           
         }
         
