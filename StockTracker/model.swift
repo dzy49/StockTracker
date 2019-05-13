@@ -23,8 +23,10 @@ class model{
     static var supportedCountry=["US","CN","IN","JP","GB","BR","AU","CA","DE"]
     static var countryFullName=["US":"United States","CN":"China","IN":"India","JP":"Japan","GB":"United Kingdom","BR":"Brazil","AU":"Autralia","CA":"Candana","DE":"German"]
     static var stockFullName=["^DJI":"Dow 30"]
+    static var searchResultDict=[String:[(symName:String,fulName:String)]]()
     static func LoadHeatMapData(){
-       getStockJson(symbol: "AAPL")
+    
+       //etStockJson(symbol: "AAPL")
        // getStockJson(symbol: "NASDAQ:^IXIC")
        // getStockJson(symbol: "000001.SHH")
     }
@@ -309,5 +311,38 @@ class model{
         //TODO
         //print("p:"+String(price))
         
+    }
+    static func getSearchResult(symbol:String,completionHandler:@escaping (_ success:Bool) -> Void){
+        let baseUrl="https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords="
+        let apiKey="&apikey=2VBS7C3YUNCMDA0M"
+        let url = baseUrl+symbol+apiKey
+        let urlStr : NSString = url.addingPercentEncoding(withAllowedCharacters:.urlQueryAllowed) as! NSString
+        let sess=URLSession.shared
+        let urls:NSURL=NSURL.init(string: urlStr as String)!
+        let request:URLRequest=NSURLRequest.init(url: urls as URL) as URLRequest
+        let group = DispatchGroup()
+        group.enter()
+        let task = sess.dataTask(with: request){(data, res, error) in
+            if(error==nil){
+                do{
+                    var resultArr=[(String,String)]()
+                    let dict = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
+                    if let matches = dict["bestMatches"] as? [Dictionary<String, Any>] {
+                        for stock in matches {
+                            let result = stock["1. symbol"] as! String
+                            let name = stock["2. name"] as! String
+                            resultArr.append((result,name))
+                        }
+                    }
+                    print("called")
+                    searchResultDict[symbol]=resultArr
+                    completionHandler(true)
+                }catch{
+                    print(error.localizedDescription)
+                    
+                }
+            }
+        }
+        task.resume()
     }
 }

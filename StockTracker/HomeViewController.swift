@@ -15,9 +15,9 @@ class StockCell: UITableViewCell{
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var change: UILabel!
-    
-
+    @IBOutlet weak var fullName: UILabel!
 }
+
 extension UITableView {
     public var cornerRadius: CGFloat {
         get {
@@ -31,6 +31,9 @@ extension UITableView {
 }
 
 class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+    var shouldGotoDetailView=false
+    var searchedSymbolName=""
+    var searchedFullName=""
     @IBOutlet weak var EditbuttonOutlet: UIButton!
     
     @IBAction func EditAction(_ sender: UIButton) {
@@ -70,32 +73,61 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = false
+        if(shouldGotoDetailView){
+            shouldGotoDetailView=false
+            performSegue(withIdentifier: "Detail", sender: nil)
+        }
+        self.navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.barTintColor = UIColor.black
         tabBarController?.tabBar.tintColor = UIColor.white
         SavedTableViewOutlet.cornerRadius=7.5
-
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if(shouldGotoDetailView){
+            shouldGotoDetailView=false
+            performSegue(withIdentifier: "Detail", sender: nil)
+        }
+        self.tabBarController?.tabBar.isHidden = false
     }
     @IBOutlet weak var SavedTableViewOutlet: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         SavedTableViewOutlet.delegate=self
         SavedTableViewOutlet.dataSource=self
         //self.navigationItem.rightBarButtonItem = self.editButtonItem
-
+        
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+   
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if(segue.identifier=="Detail"){
+            let VC=segue.destination as! StockDetailViewController
+            if let stockCell = sender as? StockCell{
+                
+                VC.symbolName=stockCell.name.text!
+                VC.fullName=stockCell.fullName.text!
+                VC.title=stockCell.name.text!
+            } else {
+                VC.symbolName=searchedSymbolName
+                VC.title=searchedSymbolName
+                VC.fullName=searchedFullName
+            }
+        }
     }
-    */
-
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
