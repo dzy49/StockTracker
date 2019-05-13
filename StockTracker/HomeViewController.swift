@@ -69,8 +69,19 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
                 let pchange=(currprice-prevprice)/prevprice*100
                 let str = NSString(format: "%.2f", currprice)
                 myCell.price.text = str as String
+                print(change)
+               
+                myCell.change.text = String(format: "%.2f",change)+"("+String(format: "%.2f", pchange)+"%)"
+                if(pchange>=0){
+                    myCell.change.backgroundColor = UIColor(red: 0, green: 0.7556203008, blue: 0.1655870676, alpha: 1)
+                }else{
+                    myCell.change.backgroundColor=UIColor.red
+                }
+                
             }
             myCell.fullName.text=orderedsaved[indexPath.row]?.first?.value
+            myCell.fullName.adjustsFontSizeToFitWidth = true
+            myCell.fullName.minimumScaleFactor = 0.2
 //            var percentString = String(saved[indexPath.row].2)
 //            percentString.append("%")
            /*myCell.change.text = percentString

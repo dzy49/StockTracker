@@ -147,7 +147,6 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
             UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:])
             }
-        
     }
     override func viewDidLoad() {
         
