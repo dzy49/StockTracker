@@ -16,6 +16,7 @@ class NewsCell: UITableViewCell{
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var publisher: UILabel!
+    @IBOutlet weak var SentimentMark: UILabel!
     
 }
 extension UISegmentedControl {
@@ -50,7 +51,34 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
     var fullName=""
     var followbutton=UIBarButtonItem()
     var newsArr=[(title:String,date:String,pulisher:String,sentiment:String)]()
+    var dataReady=false
     
+    @IBAction func RangeChange(_ sender: UISegmentedControl) {
+        if(dataReady){
+        switch RangeControl.selectedSegmentIndex{
+        case 0:
+           //1d
+            updateChart(range: 1)
+        case 1:
+            //5d
+            updateChart(range: 2)
+        case 2:
+          //1m
+            updateChart(range: 3)
+        case 3:
+           //6m
+            updateChart(range: 4)
+        case 4:
+            //1Y
+            updateChart(range: 5)
+        case 5:
+           //5Y
+            updateChart(range: 6)
+        default:
+            break
+        }
+        }
+    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
@@ -75,8 +103,31 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
             myCell.publisher.text = model.newsDict[symbolName]?[indexPath.row].source
             myCell.title.adjustsFontSizeToFitWidth = true
             myCell.title.minimumScaleFactor = 0.2
+            let defaults=UserDefaults.standard
+            var postiveText=""
+            var negativeText=""
+            var neaturalText=""
+            if(defaults.bool(forKey: "emoji")){
+                postiveText="😀"
+                negativeText="😔"
+                neaturalText="😐"
+            }else{
+                postiveText="▲"
+                negativeText="▼"
+                neaturalText="-"
+            }
+            if(model.newsDict[symbolName]?[indexPath.row].sentiment=="Positive"){
+                myCell.SentimentMark.text=postiveText
+                myCell.SentimentMark.textColor=UIColor(red: 0, green: 0.7556203008, blue: 0.1655870676, alpha: 1)
+            }else if(model.newsDict[symbolName]?[indexPath.row].sentiment=="Negative"){
+                myCell.SentimentMark.text=negativeText
+                myCell.SentimentMark.textColor=UIColor.red
+            }else{
+                myCell.SentimentMark.text=neaturalText
+                myCell.SentimentMark.textColor=#colorLiteral(red: 0.9475597739, green: 0.7683563828, blue: 0, alpha: 1)
+            }
         }
-        print("??loaded")
+        //print("??loaded")
         return cell
     }
     
@@ -94,6 +145,7 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
    
     var newView:UIView=UIView(frame: CGRect(x: 1, y:1, width: 1, height: 1))
     var button=UIButton(frame: CGRect(x: 1, y:1, width: 1, height: 1))
+    var emojiControl:UISegmentedControl?
     var blackView=UIView(frame: CGRect(x: 1, y:1, width: 1, height: 1))
     var settingOpen=false
     @IBAction func SettingButton(_ sender: UIButton) {
@@ -105,10 +157,13 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         let windowPoint=CGPoint(x: self.view.frame.maxX*0.15, y: self.view.frame.maxY*0.2)
         let windowRect=CGRect(origin: windowPoint, size: windowSize)
         newView.frame=windowRect
-        let buttonRect=CGRect(origin: CGPoint(x: newView.frame.minX*0.7, y:newView.frame.minY) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/2))
+        let buttonRect=CGRect(origin: CGPoint(x: newView.frame.minX*0.7, y:newView.frame.minY*0.5) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/5))
+        let emojiRect=CGRect(origin: CGPoint(x: newView.frame.minX*0.7, y:newView.frame.minY*0.2) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/5))
         button.frame=buttonRect
         blackView.frame=self.view.frame
-        
+        emojiControl?.frame=emojiRect
+       // emojiControl=UISegmentedControl(frame: buttonRect)
+       
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -119,13 +174,19 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         
     }
     @objc func followPressed(sender: UIButton!) {
-        print("aa")
         let defaults = UserDefaults.standard
         // let arr=[(String,String)]()
         var dict:[String:String]=defaults.dictionary(forKey: "saved") as! [String: String]
-        dict[symbolName]=fullName
-        defaults.set(dict,forKey: "saved")
-        followbutton.title="Following"
+        
+        if(followbutton.title=="+ Follow"){
+            dict[symbolName]=fullName
+            defaults.set(dict,forKey: "saved")
+            followbutton.title="Following"
+        }else{
+            dict.removeValue(forKey: symbolName)
+            defaults.set(dict,forKey: "saved")
+            followbutton.title="+ Follow"
+        }
     }
     
     @objc func buttonAction(sender: UIButton!) {
@@ -148,12 +209,35 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
             UIApplication.shared.open(url, options: [:])
             }
     }
+    @objc func changeEmoji(){
+        print(emojiControl!.selectedSegmentIndex)
+
+        switch emojiControl!.selectedSegmentIndex {
+        case 0:
+            UserDefaults.standard.set(false, forKey:"emoji")
+            NewsTableView.reloadData()
+        case 1:
+            UserDefaults.standard.set(true, forKey:"emoji")
+            NewsTableView.reloadData()
+        default:
+            break
+        }
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        let defaults = UserDefaults.standard
+       
         SymbolNameOuelet.text=symbolName
         FullNameOutlet.text=fullName;
+        FullNameOutlet.adjustsFontSizeToFitWidth = true
+        FullNameOutlet.minimumScaleFactor=0.3
+        PriceOutlet.adjustsFontSizeToFitWidth = true
+        PriceOutlet.minimumScaleFactor=0.3
+        ChangeOutlet.adjustsFontSizeToFitWidth = true
+        ChangeOutlet.minimumScaleFactor=0.3
         //newsArr.append((title: "this is a news about apple", date: "2077-01-06", pulisher: "me?"))
         //newsArr.append((title: "this is another news about apple", date: "2077-01-06", pulisher: "me again"))
         NewsTableView.delegate=self
@@ -162,8 +246,10 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
             _ in
             DispatchQueue.main.async {
                 self.NewsTableView.reloadData()
+                
             }
         }
+        
         let windowSize=CGSize(width: self.view.frame.width*0.7, height: self.view.frame.height/2)
         let windowPoint=CGPoint(x: self.view.frame.maxX*0.15, y: self.view.frame.maxY*0.2)
         let windowRect=CGRect(origin: windowPoint, size: windowSize)
@@ -172,12 +258,28 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         blackView=UIView(frame:self.view.frame)
         blackView.backgroundColor=UIColor.black
         blackView.alpha=0.35
+        let items = ["Arrow", "Emoji"]
+        emojiControl = UISegmentedControl(items: items)
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         blackView.addGestureRecognizer(tap)
         UIApplication.shared.keyWindow?.addSubview(blackView)
         UIApplication.shared.keyWindow?.addSubview(newView)
-
-        button=UIButton(frame: CGRect(origin: CGPoint(x: newView.frame.minX, y:newView.frame.minY) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/2)))
+        emojiControl!.frame=CGRect(origin: CGPoint(x: newView.frame.minX, y:newView.frame.minY) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/5))
+        emojiControl!.backgroundColor = UIColor.white
+        emojiControl!.tintColor = UIColor.green
+        emojiControl!.addTarget(self, action: #selector(changeEmoji), for: .valueChanged)
+        if(defaults.bool(forKey: "emoji")==nil){
+            defaults.set(true, forKey: "emoji")
+        }else{
+            if(defaults.bool(forKey: "emoji")){
+                emojiControl!.selectedSegmentIndex=1
+            }else{
+                emojiControl?.selectedSegmentIndex=0
+            }
+        }
+        newView.addSubview(emojiControl!)
+        
+        button=UIButton(frame: CGRect(origin: CGPoint(x: newView.frame.minX*0.7, y:newView.frame.minY) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/2)))
         button.setTitle("Done", for: .normal)
         button.tintColor=UIColor.white
         button.tag=1
@@ -190,6 +292,11 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         StockChart.delegate=self
         //labelLeadingMarginInitialConstant = labelLeadingMarginConstraint.constant
         followbutton=UIBarButtonItem(title:"+ Follow", style: .plain, target: self, action: nil)
+        var dict:[String:String]=defaults.dictionary(forKey: "saved") as! [String: String]
+        if(dict.keys.contains(symbolName)){
+            //defaults.set(dict,forKey: "saved")
+            followbutton.title="Following"
+        }
         followbutton.target = self;
         followbutton.action = #selector(followPressed);
         self.navigationItem.rightBarButtonItem=followbutton
@@ -201,57 +308,142 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         self.navigationController?.navigationBar.tintColor = UIColor.white;
         self.navigationController?.navigationBar.titleTextAttributes=[NSAttributedString.Key.foregroundColor: UIColor.white]
         RangeControl.removeBorders()
-        model.getStockJson2WCH(symbol:symbolName){
-            _ in
-            if(model.stockdict[self.symbolName]==nil||model.stockdict[self.symbolName]!.count<30){
-                  DispatchQueue.main.async {
-                    self.PriceOutlet.text="Error"
-                    self.PriceOutlet.textColor=UIColor.red
-                    self.ChangeOutlet.text="Error loading"
-                    self.ChangeOutlet.layer.cornerRadius=5
-                    self.ChangeOutlet.textColor=UIColor.red
-                }
-            }else{
-            let lastthrity=(model.stockdict[self.symbolName]?.count)!-30
-            let last=(model.stockdict[self.symbolName]?.count)!-1
-            let series1 = ChartSeries(Array(model.valueArr[lastthrity..<last]))
-            series1.color = ChartColors.darkGreenColor()
-            series1.area = true
-           // print(model.valueArr)
-            DispatchQueue.main.async {
-            self.StockChart.add([series1])
-            }
-            //StockChart.xLabels = [0, 3, 6, 9, 12, 15, 18, 21, 24]
-            //StockChart.xLabelsFormatter = { if($1<10){return String(Int(round($1))) }else {return ""}}
-            //StockChart.showXLabelsAndGrid=false
-            var labels=[0.0,10,20]
-            var labelsAsString=["a","b","c"]
-            self.StockChart.xLabels=labels
-            self.StockChart.xLabelsFormatter = { (labelIndex: Int, labelValue: Double) -> String in
-                return labelsAsString[labelIndex]
-            }
-            let currprice=(model.stockdict[self.symbolName]?[model.stockdict[self.symbolName]!.count-1])!
-            let prevprice=(model.stockdict[self.symbolName]?[model.stockdict[self.symbolName]!.count-2])!
-            let change=currprice-prevprice
-            let pchange=(currprice-prevprice)/prevprice*100
-            DispatchQueue.main.async {
-                self.PriceOutlet.text=String(currprice)
-                self.ChangeOutlet.text=String(format: "%.2f",change)+"("+String(format: "%.2f", pchange)+"%)"
-                self.ChangeOutlet.layer.cornerRadius=5
-                self.ChangeOutlet.textColor=UIColor.white
-                if(change>=0){
-                    self.ChangeOutlet.backgroundColor=UIColor(red: 0, green: 0.7556203008, blue: 0.1655870676, alpha: 1)
-                }else{
-                    self.ChangeOutlet.backgroundColor=UIColor.red
+        //if(model.stockdictFiveMin[symbolName]==nil&&model.stockdict[symbolName]==nil){
+            model.getStockJson2WCH(symbol:symbolName,range: 3){
+                _ in
+                model.getStockJson2WCH(symbol:self.symbolName,range: 1){
+                    _ in
+                    if(model.stockdict[self.symbolName]==nil||model.stockdict[self.symbolName]!.count<10){
+                        DispatchQueue.main.async {
+                            self.PriceOutlet.text="Error"
+                            self.PriceOutlet.textColor=UIColor.red
+                            self.ChangeOutlet.text="Error loading"
+                            self.ChangeOutlet.layer.cornerRadius=5
+                            self.ChangeOutlet.textColor=UIColor.red
+                        }
+                    }else{
+                        DispatchQueue.main.async {
+                            print("xxx")
+                            print(model.stockdictFiveMin[self.symbolName])
+                            self.dataReady=true
+                            self.updateChart(range: self.RangeControl.selectedSegmentIndex+1)
+                            
+                        }
+                    }
                 }
             }
-            }
-          
-        }
+        
+    }
+
         
         //print(model.stockdict.count)
 
         // Do any additional setup after loading the view.
+   // }
+    func updateChart(range:Int){
+        var datapointNum=0
+        var showMin=true
+        switch range{
+        case 1:
+            datapointNum=80
+        case 2:
+            datapointNum=70
+        case 3:
+            datapointNum=23
+            showMin=false
+        case 4:
+            datapointNum=125
+            showMin=false
+        case 5:
+            datapointNum=250
+            showMin=false
+        case 6:
+            datapointNum=1200
+            showMin=false
+        default:
+            break
+        }
+        var series1:ChartSeries?=nil
+        var last=(model.stockdictFiveMin[self.symbolName]?.count)!-1
+        if(showMin){
+            if((model.stockdictFiveMin[self.symbolName]?.count)!<datapointNum){
+                
+            }else{
+                if(range==1){
+                    
+                    let lastthrity=(model.stockdictFiveMin[self.symbolName]?.count)!-datapointNum
+                     if(last>lastthrity&&lastthrity>1){
+                        series1 = ChartSeries(Array((model.stockdictFiveMin[self.symbolName]?[lastthrity..<last])!))
+                     }else{
+                        series1 = ChartSeries(Array((model.stockdict[self.symbolName]!)))
+                    }
+                }else{
+                    last=(model.stockdictThirtyMin[self.symbolName]?.count)!-1
+                    let lastthrity=(model.stockdictThirtyMin[self.symbolName]?.count)!-datapointNum
+                         if(last>lastthrity&&lastthrity>1){
+                            series1 = ChartSeries(Array((model.stockdictThirtyMin[self.symbolName]?[lastthrity..<last])!))
+                         }else{
+                            series1 = ChartSeries(Array((model.stockdict[self.symbolName]!)))
+                    }
+                }
+            }
+        }else{
+            
+                last=(model.stockdict[self.symbolName]?.count)!-1
+                let lastthrity=(model.stockdict[self.symbolName]?.count)!-datapointNum
+            if(last>lastthrity&&lastthrity>1){
+                series1 = ChartSeries(Array((model.stockdict[self.symbolName]?[lastthrity..<last])!))
+            }else{
+                 series1 = ChartSeries(Array((model.stockdict[self.symbolName]!)))
+            }
+        }
+        //let lastthrity=(model.stockdictFiveMin[self.symbolName]?.count)!-30
+        //let last=(model.stockdictFiveMin[self.symbolName]?.count)!-1
+        //let series1 = ChartSeries(Array(model.valueArr[lastthrity..<last]))
+        //bug error handle required
+        series1!.color = ChartColors.darkGreenColor()
+        series1!.area = true
+        // print(model.valueArr)
+        DispatchQueue.main.async {
+            self.StockChart.removeAllSeries()
+            self.StockChart.add([series1!])
+        }
+        //StockChart.xLabels = [0, 3, 6, 9, 12, 15, 18, 21, 24]
+        //StockChart.xLabelsFormatter = { if($1<10){return String(Int(round($1))) }else {return ""}}
+        //StockChart.showXLabelsAndGrid=false
+       /* let totalCount=model.stockdictFiveMin[self.symbolName]?.count
+        let firstD=(Double(datapointNum)*0.2)
+        let secondD=(Double(datapointNum)*0.4)
+        let thirdD=(Double(datapointNum)*0.6)
+        var labels:[Double]=[firstD,secondD,thirdD]
+        let firtDD=model.stockdatedictFiveMin[self.symbolName]![Int(firstD)]
+        var labelsAsString=[firtDD,"b","c"]
+        self.StockChart.xLabels=labels
+        self.StockChart.xLabelsFormatter = { (labelIndex: Int, labelValue: Double) -> String in
+            return labelsAsString[labelIndex]
+        }
+ */
+        var labelsAsString:[String]=[]
+        var labels:[Double]=[]
+        self.StockChart.xLabels=labels
+        self.StockChart.xLabelsFormatter = { (labelIndex: Int, labelValue: Double) -> String in
+            return labelsAsString[labelIndex]
+        }
+        let currprice=(model.stockdict[self.symbolName]?[model.stockdict[self.symbolName]!.count-1])!
+        let prevprice=(model.stockdict[self.symbolName]?[model.stockdict[self.symbolName]!.count-2])!
+        let change=currprice-prevprice
+        let pchange=(currprice-prevprice)/prevprice*100
+        DispatchQueue.main.async {
+            self.PriceOutlet.text=String(format: "%.2f",currprice)
+            self.ChangeOutlet.text=String(format: "%.2f",change)+"("+String(format: "%.2f", pchange)+"%)"
+            self.ChangeOutlet.layer.cornerRadius=5
+            self.ChangeOutlet.textColor=UIColor.white
+            if(change>=0){
+                self.ChangeOutlet.backgroundColor=UIColor(red: 0, green: 0.7556203008, blue: 0.1655870676, alpha: 1)
+            }else{
+                self.ChangeOutlet.backgroundColor=UIColor.red
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -265,13 +457,67 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
     
     //@IBOutlet weak var SummaryHistorySwitch: UISegmentedControl!
     func didTouchChart(_ chart: Chart, indexes: Array<Int?>, x: Double, left: CGFloat) {
+        var datapointNum=0
+        var showMin=true
+        switch RangeControl.selectedSegmentIndex+1{
+        case 1:
+            datapointNum=80
+        case 2:
+            datapointNum=70
+        case 3:
+            datapointNum=23
+            showMin=false
+        case 4:
+            datapointNum=125
+            showMin=false
+        case 5:
+            datapointNum=250
+            showMin=false
+        case 6:
+            datapointNum=1200
+            showMin=false
+        default:
+            break
+        }
         if let value = chart.valueForSeries(0, atIndex: indexes[0]) {
             let numberFormatter = NumberFormatter()
             numberFormatter.minimumFractionDigits = 2
             numberFormatter.maximumFractionDigits = 2
-            let lastthrity=(model.stockdict[self.symbolName]?.count)!-30
-            let last=(model.stockdict[self.symbolName]?.count)!-1
-            let corrsArr=Array(model.stockdatedict[self.symbolName]![lastthrity..<last])
+            var lastthrity=(model.stockdictFiveMin[self.symbolName]?.count)!-datapointNum
+            var last=(model.stockdictFiveMin[self.symbolName]?.count)!-1
+            var corrsArr=[String]()
+            let myRange=RangeControl.selectedSegmentIndex+1
+            if(showMin){
+                if((model.stockdictFiveMin[self.symbolName]?.count)!<datapointNum){
+                    
+                }else{
+                    if(myRange==1){
+                        lastthrity=(model.stockdictFiveMin[self.symbolName]?.count)!-datapointNum
+                        if(last>lastthrity&&lastthrity>1){
+                            corrsArr=Array((model.stockdatedictFiveMin[self.symbolName]?[lastthrity..<last])!)
+                        }else{
+                            corrsArr = Array((model.stockdatedict[self.symbolName]!))
+                        }
+                    }else{
+                        last=(model.stockdictThirtyMin[self.symbolName]?.count)!-1
+                        lastthrity=(model.stockdictThirtyMin[self.symbolName]?.count)!-datapointNum
+                        if(last>lastthrity&&lastthrity>1){
+                            corrsArr = Array((model.stockdatedictThirtyMin[self.symbolName]?[lastthrity..<last])!)
+                        }else{
+                            corrsArr = Array((model.stockdatedict[self.symbolName]!))
+                        }
+                    }
+                }
+            }else{
+                last=(model.stockdict[self.symbolName]?.count)!-1
+                lastthrity=(model.stockdict[self.symbolName]?.count)!-datapointNum
+                if(last>lastthrity&&lastthrity>1){
+                    corrsArr = Array((model.stockdatedict[self.symbolName]?[lastthrity..<last])!)
+                }else{
+                    corrsArr = Array((model.stockdatedict[self.symbolName]!))
+                }
+            }
+            
             let date_string = corrsArr[indexes[0]!]
             let main_string = numberFormatter.string(from: NSNumber(value: value))!+" "+date_string
             let range = (main_string as NSString).range(of: date_string)
@@ -279,7 +525,6 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
             attribute.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.lightGray , range: range)
             //label.text = model.stockdatedict["AAPL"]![indexes[0]!]+" "+numberFormatter.string(from: NSNumber(value: value))!
             label.attributedText=attribute
-
         }
     }
 

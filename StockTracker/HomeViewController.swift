@@ -45,6 +45,24 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     var actsaved:[String:String]=["AAPL":"Apple lnc","MSFT":"Microsoft"]
     var orderedsaved=[Int: [String: String]]()
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            var dict=UserDefaults.standard.dictionary(forKey: "saved")
+            dict?.removeValue(forKey: (orderedsaved[indexPath.row]?.first?.key)!)
+            UserDefaults.standard.set(dict,forKey:"saved")
+            actsaved.removeValue(forKey: (orderedsaved[indexPath.row]?.first?.key)!)
+            var myDictionary = [Int: [String: String]]()
+            var i=0
+            for saved in actsaved{
+                let newDic=[saved.key:saved.value]
+                myDictionary[i]=newDic
+                i=i+1
+            }
+            orderedsaved=myDictionary
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -127,7 +145,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
 
         for  stock in actsaved {
             if(model.stockdict[stock.key]==nil){
-                model.getStockJson2WCH(symbol:stock.key){
+                model.getStockJson2WCH(symbol:stock.key,range: 3){
                     _ in
                     print("reloaded")
                     DispatchQueue.main.async {
@@ -169,7 +187,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         
         for  stock in actsaved {
             if(model.stockdict[stock.key]==nil){
-                model.getStockJson2WCH(symbol:stock.key){
+                model.getStockJson2WCH(symbol:stock.key,range: 1){
                     _ in
                         print("reloaded")
                         DispatchQueue.main.async {

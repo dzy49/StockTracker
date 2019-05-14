@@ -17,13 +17,17 @@ class IndexCell: UITableViewCell{
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var volume: UILabel!
+    @IBOutlet weak var fullname: UILabel!
 }
 
 class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet weak var MapHeightCons: NSLayoutConstraint!
+    
+    
     func changezoom(area:Int){
-        if(UIDevice.current.orientation==UIDeviceOrientation.portrait){
+        //if(UIDevice.current.orientation==UIDeviceOrientation.portrait){
             let ASpoint=CGRect(x: WorldMapView.frame.midX*1.32, y: WorldMapView.frame.midY*0.2, width: WorldMapView.frame.width*0.23, height: WorldMapView.frame.height*0.23)
+        
             let EUpoint=CGRect(x: WorldMapView.frame.midX*1, y: WorldMapView.frame.midY*0.3, width: WorldMapView.frame.width*0.0005, height: WorldMapView.frame.height*0.0005)
             let Worldpoint=CGRect(x: WorldMapView.frame.midX, y: WorldMapView.frame.midY, width: WorldMapView.frame.width, height: WorldMapView.frame.height)
             let NApoint=CGRect(x: WorldMapView.frame.minX, y: WorldMapView.frame.midY*0.11, width: WorldMapView.frame.width*0.33, height: WorldMapView.frame.height*0.33)
@@ -45,7 +49,7 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             default:
                 break
             }
-        }
+        //}
     }
     @IBAction func ZoomChange(_ sender: UISegmentedControl) {
         switch ZoomControl.selectedSegmentIndex{
@@ -108,13 +112,26 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         let price=getMarketData(marketName: currIndex[indexPath.row]).0
         let volume=getMarketData(marketName: currIndex[indexPath.row]).1
         if let myCell =  cell as? IndexCell {
+            myCell.name.adjustsFontSizeToFitWidth=true
+            myCell.name.minimumScaleFactor=0.3
+            myCell.fullname.adjustsFontSizeToFitWidth=true
+            myCell.fullname.minimumScaleFactor=0.3
             myCell.name.text = currIndex[indexPath.row]
-            myCell.price.text = price
-            myCell.volume.text = String(volume)
-            if(Double(price.dropLast())!>0.0){
-                myCell.price.backgroundColor = UIColor(red: 0, green: 0.7556203008, blue: 0.1655870676, alpha: 1)
+            myCell.price.textColor=UIColor.white
+            myCell.fullname.text=model.stockFullName[currIndex[indexPath.row]]
+            if(price.count==0){
+                myCell.price.text = "loading"
+                myCell.volume.text="loading"
+                myCell.price.backgroundColor=UIColor.black
             }else{
-                myCell.price.backgroundColor=UIColor.red
+                var text:String=String(price.dropLast())
+                myCell.price.text =  String(format: "%.2f", Double(text)!)+"%"
+                myCell.volume.text = String(format: "%.2f", volume)
+                if(Double(price.dropLast())!>0.0){
+                    myCell.price.backgroundColor = UIColor(red: 0, green: 0.7556203008, blue: 0.1655870676, alpha: 1)
+                }else{
+                    myCell.price.backgroundColor=UIColor.red
+                }
             }
             myCell.selectionStyle = UITableViewCell.SelectionStyle.none
         }
@@ -144,13 +161,16 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             model.getStockIndexInfo(symbol: symbol){
                 _ in
                 self.updateMapColor()
+                DispatchQueue.main.async {
+                    self.MarketTableView.reloadData()
+                }
             }
             model.loaded=true
         }
         
            
            // model.getSesssionDataTask()
-            spinner.stopAnimating()
+          //  spinner.stopAnimating()
         }
     }
         
@@ -167,7 +187,7 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         spinner.center=view.center
         spinner.style=UIActivityIndicatorView.Style.gray
         view.addSubview(spinner)
-        spinner.startAnimating()
+        //spinner.startAnimating()
         spinner.hidesWhenStopped=true
         weak var oldClickedLayer = CAShapeLayer()
         var mapColors = [UIColor]()
@@ -209,9 +229,12 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         //map.loadMap(mapName, withData:mapData, colorAxis:mapColors)
         computeColors()
         map.loadMap(mapName, withColors: mapColor)
-        WorldMapView.contentSize=CGSize(width: 200, height: 200)
+        //WorldMapView.contentSize=WorldMapView.frame.size
+        //WorldMapView.zoom(to: WorldMapView.frame, animated: false)
         WorldMapView.addSubview(map)
         WorldMapView.setNeedsDisplay()
+        view.setNeedsDisplay()
+        view.layoutSubviews()
         //WorldMapView.frame.size
         WorldMapView.maximumZoomScale=6
         WorldMapView.minimumZoomScale=0.0001
@@ -220,7 +243,17 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         //view.layer.cornerRadius = 10
         MarketTableView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
-    
+   
+   
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+            //ZoomControl.selectedSegmentIndex=0
+        } else {
+            
+        }
+    }
     func updateMapColor(){
         //mapColor["US"]=UIColor.blue
         //map.setColors(mapColor)
@@ -230,7 +263,7 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
             self.map.setColors(self.mapColor)
         }
     }
-
+  
     /*
     // MARK: - Navigation
 

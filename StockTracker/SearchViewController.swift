@@ -65,7 +65,7 @@ class SearchViewController:UIViewController,UITableViewDataSource,UITableViewDel
     @objc func textFieldDidChange(textField: UITextField) {
         let searchText=SearchBar.text
         //let delay=DispatchTime(uptimeNanoseconds: 1000000000)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
             if(searchText==self.SearchBar.text){
                 if(model.searchResultDict[searchText!]==nil){
                     model.getSearchResult(symbol:searchText!){
