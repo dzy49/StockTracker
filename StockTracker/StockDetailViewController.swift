@@ -413,12 +413,17 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         //let last=(model.stockdictFiveMin[self.symbolName]?.count)!-1
         //let series1 = ChartSeries(Array(model.valueArr[lastthrity..<last]))
         //bug error handle required
-        series1!.color = ChartColors.darkGreenColor()
-        series1!.area = true
+        if let s=series1{
+            s.color = ChartColors.darkGreenColor()
+            s.area = true
+        }
         // print(model.valueArr)
         DispatchQueue.main.async {
             self.StockChart.removeAllSeries()
-            self.StockChart.add([series1!])
+            if let s=series1{
+                self.StockChart.add([s])
+            }
+            
         }
         //StockChart.xLabels = [0, 3, 6, 9, 12, 15, 18, 21, 24]
         //StockChart.xLabelsFormatter = { if($1<10){return String(Int(round($1))) }else {return ""}}
@@ -493,6 +498,9 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
             showMin=false
         default:
             break
+        }
+        if (chart.series.count==0){
+            return
         }
         if let value = chart.valueForSeries(0, atIndex: indexes[0]) {
             let numberFormatter = NumberFormatter()
