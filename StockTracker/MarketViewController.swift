@@ -22,6 +22,19 @@ class MarketViewController: UIViewController,UITableViewDelegate,UITableViewData
     var sortFinish=false
     var finishedCount=0
     var firstSet=true
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if(SortButton.titleLabel?.text=="-"&&finishedCount==model.indexArr.count){
+            sortFinish=true
+            sorted=upsorted
+            MarketTable.reloadData()
+            SortButton.setTitle("↑", for: .normal)
+        }
+        MarketTable.reloadData()
+
+        print("?!")
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }

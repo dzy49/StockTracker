@@ -137,7 +137,12 @@ class HeatMapViewController: UIViewController,UIScrollViewDelegate,UITableViewDe
         }
         return cell
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        if(model.loaded){
+            self.computeColors()
+            self.map.setColors(self.mapColor)
+        }
+    }
     func computeColors(){
         for country in model.marketIndex{
             for indexName in country.value{
