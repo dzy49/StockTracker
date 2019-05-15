@@ -10,8 +10,9 @@
 		6C99B87E743D23864AF94F0B /* Pods_StockTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E775AC013F0EAE70335AD62A /* Pods_StockTracker.framework */; };
 		8B02A8A6226FB9CA00E3C114 /* world-low.svg in Resources */ = {isa = PBXBuildFile; fileRef = 8B02A8A5226FB9CA00E3C114 /* world-low.svg */; };
 		8B1652F422885B7D0089A79E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1652F322885B7D0089A79E /* SearchViewController.swift */; };
+		8B70D56B228B6E2B00D6C219 /* MarketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70D56A228B6E2B00D6C219 /* MarketViewController.swift */; };
+		8B70D56D228B887600D6C219 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70D56C228B887600D6C219 /* AboutViewController.swift */; };
 		8BB8A633226625A400C49A41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8A632226625A400C49A41 /* AppDelegate.swift */; };
-		8BB8A635226625A400C49A41 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8A634226625A400C49A41 /* ViewController.swift */; };
 		8BB8A63A226625A500C49A41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BB8A639226625A500C49A41 /* Assets.xcassets */; };
 		8BB8A63D226625A500C49A41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB8A63B226625A500C49A41 /* LaunchScreen.storyboard */; };
 		8BB8A6452266428300C49A41 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB8A6442266428300C49A41 /* model.swift */; };
@@ -26,10 +27,11 @@
 		8B02A8A5226FB9CA00E3C114 /* world-low.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "world-low.svg"; sourceTree = "<group>"; };
 		8B0EDBD2226FB319003BE757 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
 		8B1652F322885B7D0089A79E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		8B70D56A228B6E2B00D6C219 /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewController.swift; sourceTree = "<group>"; };
+		8B70D56C228B887600D6C219 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		8B7C2A48226FB1DE00C0DF19 /* libFSInteractiveMap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFSInteractiveMap.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB8A62F226625A400C49A41 /* StockTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB8A632226625A400C49A41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8BB8A634226625A400C49A41 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8BB8A639226625A500C49A41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8BB8A63C226625A500C49A41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BB8A63E226625A500C49A41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,14 +78,15 @@
 		8BB8A631226625A400C49A41 /* StockTracker */ = {
 			isa = PBXGroup;
 			children = (
+				8B70D56C228B887600D6C219 /* AboutViewController.swift */,
 				8B02A8A5226FB9CA00E3C114 /* world-low.svg */,
 				8BB8A653226D7C7000C49A41 /* StockDetailViewController.swift */,
 				8BB8A64C226D762400C49A41 /* Main.storyboard */,
+				8B70D56A228B6E2B00D6C219 /* MarketViewController.swift */,
 				8B1652F322885B7D0089A79E /* SearchViewController.swift */,
 				8BC4C4A7226FA63F00771E17 /* HeatMapViewController.swift */,
 				8BB8A648226D6ED700C49A41 /* HomeViewController.swift */,
 				8BB8A632226625A400C49A41 /* AppDelegate.swift */,
-				8BB8A634226625A400C49A41 /* ViewController.swift */,
 				8BB8A6442266428300C49A41 /* model.swift */,
 				8BB8A639226625A500C49A41 /* Assets.xcassets */,
 				8BB8A63B226625A500C49A41 /* LaunchScreen.storyboard */,
@@ -235,12 +238,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B70D56B228B6E2B00D6C219 /* MarketViewController.swift in Sources */,
 				8BB8A654226D7C7000C49A41 /* StockDetailViewController.swift in Sources */,
 				8B1652F422885B7D0089A79E /* SearchViewController.swift in Sources */,
-				8BB8A635226625A400C49A41 /* ViewController.swift in Sources */,
 				8BB8A6452266428300C49A41 /* model.swift in Sources */,
 				8BC4C4A8226FA63F00771E17 /* HeatMapViewController.swift in Sources */,
 				8BB8A633226625A400C49A41 /* AppDelegate.swift in Sources */,
+				8B70D56D228B887600D6C219 /* AboutViewController.swift in Sources */,
 				8BB8A649226D6ED700C49A41 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

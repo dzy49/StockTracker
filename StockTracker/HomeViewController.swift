@@ -164,11 +164,31 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         
     }
     @IBOutlet weak var SavedTableViewOutlet: UITableView!
+    @objc private func refreshWeatherData(_ sender: Any) {
+        for  stock in actsaved {
+            
+                model.getStockJson2WCH(symbol:stock.key,range: 1){
+                    _ in
+                    print("reloaded")
+                    DispatchQueue.main.async {
+                        self.SavedTableViewOutlet.reloadData()
+                        //self.SavedTableViewOutlet.updateView()
+                        self.SavedTableViewOutlet.refreshControl?.endRefreshing()
+                       // self.SavedTableViewOutlet.activityIndicatorView.stopAnimating()
+                    }
+                }
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         SavedTableViewOutlet.delegate=self
         SavedTableViewOutlet.dataSource=self
+        let refreshControl = UIRefreshControl()
+        SavedTableViewOutlet.refreshControl=refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshWeatherData(_:)), for: .valueChanged)
+        
         let defaults = UserDefaults.standard
        // let arr=[(String,String)]()
         if (defaults.dictionary(forKey: "saved")==nil){

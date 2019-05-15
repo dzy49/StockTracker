@@ -38,7 +38,6 @@ class SearchViewController:UIViewController,UITableViewDataSource,UITableViewDel
     @IBOutlet weak var SearchResultTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         SearchResultTable.delegate=self
         SearchResultTable.dataSource=self
         SearchBar.becomeFirstResponder()
@@ -51,7 +50,6 @@ class SearchViewController:UIViewController,UITableViewDataSource,UITableViewDel
             let barViewControllers = segue.destination as! UITabBarController
             //let targetController = destinationTabController[0] as! HomeViewController
             //targetController.shouldGotoDetailView=true
-            
             let nav = barViewControllers.viewControllers![0] as! UINavigationController
             let targetController = nav.topViewController as! HomeViewController
             if let stockCell = sender as? SearchCell{

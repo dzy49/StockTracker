@@ -47,11 +47,17 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
     @IBOutlet weak var StockChart: Chart!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var NewsTableView: UITableView!
+    var settingLabel=UILabel(frame: CGRect(x: 1, y:1, width: 1, height: 1))
     var symbolName:String=""
     var fullName=""
     var followbutton=UIBarButtonItem()
     var newsArr=[(title:String,date:String,pulisher:String,sentiment:String)]()
     var dataReady=false
+    var newView:UIView=UIView(frame: CGRect(x: 1, y:1, width: 1, height: 1))
+    var button=UIButton(frame: CGRect(x: 1, y:1, width: 1, height: 1))
+    var emojiControl:UISegmentedControl?
+    var blackView=UIView(frame: CGRect(x: 1, y:1, width: 1, height: 1))
+    var settingOpen=false
     
     @IBAction func RangeChange(_ sender: UISegmentedControl) {
         if(dataReady){
@@ -98,7 +104,10 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         if let myCell =  cell as? NewsCell {
            
             myCell.selectionStyle = UITableViewCell.SelectionStyle.none
-            myCell.date.text = model.newsDict[symbolName]?[indexPath.row].date
+            let datetext=model.newsDict[symbolName]?[indexPath.row].date
+            myCell.date.text = String((datetext?.dropLast(5))!)
+            myCell.date.minimumScaleFactor=0.2
+            myCell.date.adjustsFontSizeToFitWidth=true
             myCell.title.text = model.newsDict[symbolName]?[indexPath.row].title
             myCell.publisher.text = model.newsDict[symbolName]?[indexPath.row].source
             myCell.title.adjustsFontSizeToFitWidth = true
@@ -143,25 +152,23 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
     
     //@IBOutlet weak var AreaLineGraph: XAreaLineContainerView!
    
-    var newView:UIView=UIView(frame: CGRect(x: 1, y:1, width: 1, height: 1))
-    var button=UIButton(frame: CGRect(x: 1, y:1, width: 1, height: 1))
-    var emojiControl:UISegmentedControl?
-    var blackView=UIView(frame: CGRect(x: 1, y:1, width: 1, height: 1))
-    var settingOpen=false
+    
     @IBAction func SettingButton(_ sender: UIButton) {
         newView.isHidden = !newView.isHidden
         blackView.isHidden = !blackView.isHidden
     }
     func updateView(){
-        let windowSize=CGSize(width: self.view.frame.width*0.7, height: self.view.frame.height/2)
+        let windowSize=CGSize(width: self.view.frame.width*0.7, height: self.view.frame.height/4)
         let windowPoint=CGPoint(x: self.view.frame.maxX*0.15, y: self.view.frame.maxY*0.2)
         let windowRect=CGRect(origin: windowPoint, size: windowSize)
         newView.frame=windowRect
-        let buttonRect=CGRect(origin: CGPoint(x: newView.frame.minX*0.7, y:newView.frame.minY*0.5) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/5))
-        let emojiRect=CGRect(origin: CGPoint(x: newView.frame.minX*0.7, y:newView.frame.minY*0.2) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/5))
+        let buttonRect=CGRect(origin: CGPoint(x: newView.frame.minX*0.7, y:newView.frame.minY*0.7) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/8))
+        let emojiRect=CGRect(origin: CGPoint(x: newView.frame.minX*0.7, y:newView.frame.minY*0.5) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/8))
+        let labelRect=CGRect(origin: CGPoint(x: newView.frame.minX*0.7, y:newView.frame.minY*0.2) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/5))
         button.frame=buttonRect
         blackView.frame=self.view.frame
         emojiControl?.frame=emojiRect
+        settingLabel.frame=labelRect
        // emojiControl=UISegmentedControl(frame: buttonRect)
        
     }
@@ -258,7 +265,7 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         blackView=UIView(frame:self.view.frame)
         blackView.backgroundColor=UIColor.black
         blackView.alpha=0.35
-        let items = ["Arrow", "Emoji"]
+        let items = ["Arrows", "Emoji"]
         emojiControl = UISegmentedControl(items: items)
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         blackView.addGestureRecognizer(tap)
@@ -266,7 +273,8 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
         UIApplication.shared.keyWindow?.addSubview(newView)
         emojiControl!.frame=CGRect(origin: CGPoint(x: newView.frame.minX, y:newView.frame.minY) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/5))
         emojiControl!.backgroundColor = UIColor.white
-        emojiControl!.tintColor = UIColor.green
+        emojiControl!.tintColor = #colorLiteral(red: 0.03657037765, green: 0.4095795453, blue: 0.4451715946, alpha: 1)
+        
         emojiControl!.addTarget(self, action: #selector(changeEmoji), for: .valueChanged)
         if(defaults.bool(forKey: "emoji")==nil){
             defaults.set(true, forKey: "emoji")
@@ -278,7 +286,11 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
             }
         }
         newView.addSubview(emojiControl!)
-        
+        newView.addSubview(settingLabel)
+        settingLabel.text="Dispaly sentiment marks as:"
+        settingLabel.adjustsFontSizeToFitWidth=true
+        settingLabel.minimumScaleFactor=0.2
+        settingLabel.textColor=UIColor.black
         button=UIButton(frame: CGRect(origin: CGPoint(x: newView.frame.minX*0.7, y:newView.frame.minY) , size: CGSize(width: newView.frame.width*0.7, height: newView.frame.height/2)))
         button.setTitle("Done", for: .normal)
         button.tintColor=UIColor.white
@@ -457,6 +469,9 @@ class StockDetailViewController:UIViewController,ChartDelegate,UITableViewDelega
     
     //@IBOutlet weak var SummaryHistorySwitch: UISegmentedControl!
     func didTouchChart(_ chart: Chart, indexes: Array<Int?>, x: Double, left: CGFloat) {
+        if(PriceOutlet.text=="Error"||PriceOutlet.text=="Loading"){
+            return
+        }
         var datapointNum=0
         var showMin=true
         switch RangeControl.selectedSegmentIndex+1{
