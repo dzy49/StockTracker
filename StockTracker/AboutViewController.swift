@@ -13,7 +13,7 @@ class AboutViewController: UIViewController {
     @IBAction func ResetAction(_ sender: UIButton) {
         let alert = UIAlertController(title: "Warning", message: "Do you want to reset watchlist? All data will be deleted", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-            var actsaved:[String:String]=["AAPL":"Apple lnc","MSFT":"Microsoft"]
+           var actsaved:[String:String]=["AAPL":"Apple Inc.","MSFT":"Microsoft Corporation"]
             UserDefaults.standard.set(actsaved,forKey: "saved")
         }))
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))

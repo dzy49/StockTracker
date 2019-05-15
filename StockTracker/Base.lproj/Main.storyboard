@@ -481,7 +481,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="391" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Click on map to display data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wy-Ye-QnB">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Touch on map to display data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wy-Ye-QnB">
                                             <rect key="frame" x="15" y="9" width="341" height="27"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="21"/>
@@ -598,7 +598,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="g3m-yl-jzg"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="HeatMap" id="nmI-X6-LPG"/>
+                    <tabBarItem key="tabBarItem" title="HeatMap" image="globe_earth" id="nmI-X6-LPG"/>
                     <connections>
                         <outlet property="MapHeightCons" destination="A4k-Qx-0kM" id="Rey-W5-nxq"/>
                         <outlet property="MarketName" destination="5Wy-Ye-QnB" id="VbR-VK-zwt"/>
@@ -673,7 +673,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8pG-6z-S4x"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="About" id="e3q-gd-Ggi"/>
+                    <tabBarItem key="tabBarItem" title="About" image="support" id="e3q-gd-Ggi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3d6-X3-0LJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -696,7 +696,7 @@
         <scene sceneID="7sM-jp-31f">
             <objects>
                 <navigationController id="bl2-f8-B1k" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="kUk-cT-Hah"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home" selectedImage="home" id="kUk-cT-Hah"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0CO-p9-Icf">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -720,6 +720,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.1797430813" green="0.4031980932" blue="0.43922320009999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
+                                <color key="value" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="bl2-f8-B1k" kind="relationship" relationship="viewControllers" id="IpK-dI-fjd"/>
@@ -843,7 +851,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Cdy-dz-nkc" firstAttribute="leading" secondItem="lad-rw-KZ9" secondAttribute="leading" constant="11" id="K3Q-p9-eZU"/>
                             <constraint firstItem="Cdy-dz-nkc" firstAttribute="top" secondItem="lad-rw-KZ9" secondAttribute="top" constant="15" id="VxI-wt-dmW"/>
@@ -852,7 +860,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lad-rw-KZ9"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Markets" id="NqZ-Oj-92u"/>
+                    <tabBarItem key="tabBarItem" title="Markets" image="combo_chart" id="NqZ-Oj-92u"/>
                     <connections>
                         <outlet property="MarketTable" destination="Cdy-dz-nkc" id="NJG-Lu-ZHD"/>
                         <outlet property="SortButton" destination="gmZ-bA-x3L" id="E39-KI-6cM"/>
@@ -958,6 +966,10 @@
         <image name="OOjs_UI_icon_advanced_apex.svg" width="1024" height="1024"/>
         <image name="arrow_back_grey_192x192" width="192" height="192"/>
         <image name="box_edit-512" width="512" height="512"/>
+        <image name="combo_chart" width="30" height="30"/>
+        <image name="globe_earth" width="30" height="30"/>
+        <image name="home" width="30" height="30"/>
+        <image name="support" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uJt-e5-JRC"/>

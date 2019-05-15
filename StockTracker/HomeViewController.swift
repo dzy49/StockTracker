@@ -42,7 +42,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         SavedTableViewOutlet.setEditing(!SavedTableViewOutlet.isEditing, animated: true)
     }
     var saved:[(String,Double,Double)]=[("AAPL",0.0,-0.0),("MSFT",0.0,-0.0)]
-    var actsaved:[String:String]=["AAPL":"Apple lnc","MSFT":"Microsoft"]
+    var actsaved:[String:String]=["AAPL":"Apple Inc.","MSFT":"Microsoft Corporation"]
     var orderedsaved=[Int: [String: String]]()
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

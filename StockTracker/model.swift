@@ -31,7 +31,7 @@ class model{
     static var marketIndex:[String:[String]]=["US":["^DJI","NASDAQ:^IXIC"],"CN":["000001.SHH"],"IN":["^BSESN"],"JP":["^N225"],"GB":["^FTSE"],"BR":["^BVSP"],"AU":["^XJO"],"CA":["^GSPTSE"],"DE":["^DAX"]]
     static var indexArr=["^DJI","NASDAQ:^IXIC","000001.SHH","^BSESN","^N225","^FTSE","^BVSP","^XJO","^GSPTSE","^DAX"]
     static var supportedCountry=["US","CN","IN","JP","GB","BR","AU","CA","DE"]
-    static var countryFullName=["US":"United States","CN":"China","IN":"India","JP":"Japan","GB":"United Kingdom","BR":"Brazil","AU":"Autralia","CA":"Candana","DE":"German"]
+    static var countryFullName=["US":"United States","CN":"China","IN":"India","JP":"Japan","GB":"United Kingdom","BR":"Brazil","AU":"Autralia","CA":"Canada","DE":"Germany"]
     static var stockFullName=["^DJI":"Dow 30","000001.SHH":"SSE Composite Index","^BSESN":"BSE SENSEX","NASDAQ:^IXIC":"Nasdaq Composite","^N225":"Nikkei 225","^FTSE":"FTSE 100 Index","^XJO":"S&P/ASX 200","^GSPTSE":"S&P/TSX Composite index","^BVSP":"IBOVESPA","^DAX":"DAX PERFORMANCE-INDEX"]
     static var newsDict=[String:[(title:String,date:String,source:String,url:String,sentiment:String)]]()
     static var searchResultDict=[String:[(symName:String,fulName:String)]]()
